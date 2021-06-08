@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useLoader, useFrame } from '@react-three/fiber'
 import * as THREE from "three"
 import { TweenMax as TM } from 'gsap'
-import "./ImageShaderWhiteMaterial"
+import "./shaders/ImageShaderWhiteMaterial"
 
 export default function Image({ position }) {
   const ref = useRef()

@@ -14,7 +14,7 @@ export default function Experience() {
     }}>
       <Canvas camera={{ position: [0, 0, 2], fov: 50 }}>
         <Suspense fallback={null}>
-          <ambientLight intensity={0.1} />
+          <ambientLight intensity={1.0} />
           <Scene cursorPosition={cursorPosition} />
         </Suspense>
       </Canvas>

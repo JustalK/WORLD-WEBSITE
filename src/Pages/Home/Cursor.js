@@ -13,7 +13,7 @@ export default function Cursor({ cursorPosition }) {
   return (
     <mesh ref={ref} position={[0, 0, 0.0001]}>
       <circleGeometry args={[0.05, 32]} />
-      <meshStandardMaterial color="#000000" />
+      <meshStandardMaterial color={"#ffffff"} />
     </mesh>
   )
 }
