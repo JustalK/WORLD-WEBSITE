@@ -23,12 +23,12 @@ export default function Image({ position }) {
           y: e.intersections[0].uv.y
         })
       }}>
-        <planeGeometry args={[1, 1.25, 32, 32]} />
+        <planeGeometry args={[0.95, 1.2, 32, 32]} />
         <imageShaderWhiteMaterial ref={ref} tDiffuse={tDiffuse} />
       </mesh>
-      <mesh position={[position[0], position[1], position[2]-0.001]}>
-        <planeGeometry args={[1, 1.25, 32, 32]} />
-        <meshStandardMaterial color="#000000" />
+      <mesh rotation={[0, 0, -0.05]} position={[position[0], position[1], position[2]-0.00005]}>
+        <planeGeometry args={[0.95, 1.2, 32, 32]} />
+        <meshStandardMaterial color="#0000ff" />
       </mesh>
     </>
   )
