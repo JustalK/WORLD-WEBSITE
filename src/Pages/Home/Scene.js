@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Image from './Image'
 import Cursor from './Cursor'
-import { useThree } from '@react-three/fiber'
+import { useThree, useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
+import './shaders/BackgroundShaderMaterial'
 
 export default function Scene({ cursorPosition }) {
   const viewport = useThree((state) => state.viewport)
+  const material = useRef()
+
+  useFrame((state, delta) => {
+    material.current.uTime += delta
+  })
 
   return (
     <>
@@ -16,7 +22,7 @@ export default function Scene({ cursorPosition }) {
       <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />
       <mesh position={[0, 0, 0]}>
         <planeGeometry args={[viewport.width, viewport.height]} />
-        <meshStandardMaterial color={"#000000"} />
+        <backgroundShaderMaterial ref={material} />
       </mesh>
     </>
   )

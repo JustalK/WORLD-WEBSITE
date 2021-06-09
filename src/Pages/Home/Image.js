@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useLoader, useFrame } from '@react-three/fiber'
 import * as THREE from "three"
 import { TweenMax as TM } from 'gsap'
-import "./shaders/ImageShaderWhiteMaterial"
+import './shaders/ImageShaderWhiteMaterial'
 
 export default function Image({ position }) {
   const ref = useRef()
@@ -28,7 +28,7 @@ export default function Image({ position }) {
       </mesh>
       <mesh rotation={[0, 0, -0.05]} position={[position[0], position[1], position[2]-0.00005]}>
         <planeGeometry args={[0.95, 1.2, 32, 32]} />
-        <meshStandardMaterial color="#0000ff" />
+        <meshStandardMaterial color="#ffffff" />
       </mesh>
     </>
   )
