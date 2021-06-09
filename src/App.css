@@ -14,3 +14,16 @@ h1 {
   line-height: 4rem;
   color: #ffffff;
 }
+
+nav {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+a {
+  padding: 20px;
+  text-decoration: none;
+  color: white;
+}

@@ -28,8 +28,16 @@ export default function Scene({ cursorPosition }) {
 
   return (
     <>
-      <Html position={[0, 0.6 * viewport.height / 2, 0]} style={{'pointer-events': 'none', width: '100vw'}} center >
+      <Html position={[0, 0.6 * viewport.height / 2, 0]} style={{'pointerEvents': 'none', width: '100vw'}} center >
         <h1>Any Variation<br />is another world</h1>
+      </Html>
+      <Html position={[0, 0.95 * viewport.height / 2, 0]} style={{width: '100vw'}} center >
+        <nav>
+        <a href="/html/">HTML</a>
+        <a href="/css/">CSS</a>
+        <a href="/js/">JavaScript</a>
+        <a href="/python/">Python</a>
+        </nav>
       </Html>
       <Cursor cursorPosition={cursorPosition} />
       <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />
