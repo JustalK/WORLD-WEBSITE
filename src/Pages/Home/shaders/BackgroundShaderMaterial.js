@@ -55,7 +55,7 @@ export class BackgroundShaderMaterial extends THREE.ShaderMaterial {
       }
       void main() {
         vec3 color = vec3(0.035, 0.078, 0.356);
-        vec3 colorHover = vec3(0.035, 0.978, 0.356);
+        vec3 colorHover = vec3(0.978, 0.035, 0.356);
         float circleMouse = circle(vUv, uMouse, 0.0005, 0.5);
         float cornerLeftBottom = circle(vUv, vec2(0, 0), 0.0005, 4.0);
         float cornerRightTop = circle(vUv, vec2(1, 1), 0.0005, 4.0);
