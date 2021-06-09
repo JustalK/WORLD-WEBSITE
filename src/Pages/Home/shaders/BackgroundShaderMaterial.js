@@ -5,10 +5,8 @@ export class BackgroundShaderMaterial extends THREE.ShaderMaterial {
   constructor() {
     super({
       uniforms: {
-        uVeloX: { value: 0.0 },
-        uVeloY: { value: 0.0 },
         uResolution: { value: new THREE.Vector2(window.innerHeight/window.innerWidth,window.innerHeight/window.innerWidth)},
-        uMouse: { value: new THREE.Vector2(0, 0) },
+        uMouse: { value: new THREE.Vector2(0.1, 0.5) },
         uTime: { value: 0.0 }
       },
       vertexShader: `
@@ -18,8 +16,6 @@ export class BackgroundShaderMaterial extends THREE.ShaderMaterial {
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0 );
         }`,
       fragmentShader: `
-      uniform float uVeloX;
-      uniform float uVeloY;
       uniform float uTime;
       uniform vec2 uResolution;
       uniform vec2 uMouse;
@@ -59,6 +55,8 @@ export class BackgroundShaderMaterial extends THREE.ShaderMaterial {
       }
       void main() {
         vec3 color = vec3(0.035, 0.078, 0.356);
+        vec3 colorHover = vec3(0.035, 0.978, 0.356);
+        float circleMouse = circle(vUv, uMouse, 0.0005, 0.5);
         float cornerLeftBottom = circle(vUv, vec2(0, 0), 0.0005, 4.0);
         float cornerRightTop = circle(vUv, vec2(1, 1), 0.0005, 4.0);
         float maskLeftBottom = smoothstep(0.4, 0.5, cornerLeftBottom);
@@ -72,27 +70,21 @@ export class BackgroundShaderMaterial extends THREE.ShaderMaterial {
         vec2 r = vec2(0.0);
         r.x = fbm(st + (1.0 * q) + vec2(0.0, 9.2) + (0.1 * uTime));
         //r.y = fbm(st + (1.0 * q) + vec2(0.0, 2.8) + (0.05 * uTime));
-
         float f = fbm(st + r);
 
         float coef = (f * f * f + (0.6 * f * f) + (0.5 * f));
-        vec4 mixed1 = mix(vec4(coef * color, 1.0), vec4(0.0, 0.0, 0.0, 1.0), maskLeftBottom);
-        vec4 mixed2 = mix(mixed1, vec4(0.0, 0.0, 0.0, 1.0), maskRightTop);
-        gl_FragColor = mixed2;
+        vec4 mixed1 = mix(vec4(coef * color, 1.0), vec4(coef * colorHover, 1.0), circleMouse);
+        vec4 mixed2 = mix(mixed1, vec4(0.0, 0.0, 0.0, 1.0), maskLeftBottom);
+        vec4 mixed3 = mix(mixed2, vec4(0.0, 0.0, 0.0, 1.0), maskRightTop);
+        gl_FragColor = mixed3;
       }`
     })
   }
-  get uVeloX() {
-    return this.uniforms.uVeloX.value
+  get uMouse() {
+    return this.uniforms.uMouse.value
   }
-  set uVeloX(v) {
-    return (this.uniforms.uVeloX.value = v)
-  }
-  get uVeloY() {
-    return this.uniforms.uVeloY.value
-  }
-  set uVeloY(v) {
-    return (this.uniforms.uVeloY.value = v)
+  set uMouse(v) {
+    return (this.uniforms.uMouse.value = v)
   }
   get uTime() {
     return this.uniforms.uTime.value

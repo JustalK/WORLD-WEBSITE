@@ -12,9 +12,6 @@ export default function Cursor({ cursorPosition }) {
   useFrame((state, delta) => {
     ref.current.position.x = viewport.width * ( 2 * cursorPosition.current.x - 1) / 2
     ref.current.position.y = - viewport.height * ( 2 * cursorPosition.current.y - 1) / 2
-
-    ref.current.position.x = viewport.width * ( 2 * cursorPosition.current.x - 1) / 2
-    ref.current.position.y = - viewport.height * ( 2 * cursorPosition.current.y - 1) / 2
     if (lastMouseX.current === null) {
         lastMouseX.current = state.mouse.x
         lastMouseY.current = state.mouse.y

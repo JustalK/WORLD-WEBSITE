@@ -3,6 +3,7 @@ import Image from './Image'
 import Cursor from './Cursor'
 import { useThree, useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
+import { TweenMax as TM } from 'gsap'
 import './shaders/BackgroundShaderMaterial'
 
 export default function Scene({ cursorPosition }) {
@@ -20,7 +21,12 @@ export default function Scene({ cursorPosition }) {
       </Html>
       <Cursor cursorPosition={cursorPosition} />
       <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />
-      <mesh position={[0, 0, 0]}>
+      <mesh position={[0, 0, 0]}onPointerMove={(e) => {
+          TM.to(material.current.uMouse, 0.5, {
+            x: e.intersections[0].uv.x,
+            y: e.intersections[0].uv.y
+          })
+        }}>
         <planeGeometry args={[viewport.width, viewport.height]} />
         <backgroundShaderMaterial ref={material} />
       </mesh>
