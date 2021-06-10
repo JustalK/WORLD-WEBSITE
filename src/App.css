@@ -23,7 +23,12 @@ nav {
 }
 
 a {
-  padding: 20px;
+  padding: 50px;
   text-decoration: none;
-  color: white;
+  color: blue;
+  line-height: 100px;
+}
+
+span {
+  pointer-events: none;
 }
