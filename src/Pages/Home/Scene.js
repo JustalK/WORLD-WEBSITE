@@ -17,7 +17,6 @@ export default function Scene({ cursorPosition }) {
 
   useFrame((state, delta) => {
     material.current.uTime += delta
-    //console.log(link.current.getBoundingClientRect().left)
   })
 
   const nbrPoints = 100
@@ -31,7 +30,7 @@ export default function Scene({ cursorPosition }) {
   const points = curve.getPoints( nbrPoints );
   const lineGeometry = new THREE.BufferGeometry().setFromPoints( points );
 
-  const calculLock = useCallback(ref => {
+  const lock = useCallback(ref => {
     const centerX = ref.current.getBoundingClientRect().left + ref.current.getBoundingClientRect().width / 2
     const centerY = ref.current.getBoundingClientRect().top + ref.current.getBoundingClientRect().height / 2
     const centerXrelative = centerX/window.innerWidth;
@@ -55,14 +54,14 @@ export default function Scene({ cursorPosition }) {
       <Html position={[0, 1.05 * viewport.height / 2, 0]} style={{width: '100vw'}} center >
         <nav>
         <a ref={link1} href="/html/" onPointerEnter={(e) => {
-          calculLock(link1)
+          lock(link1)
         }} onPointerOut={(e) => {
           setHover(false)
         }}>
-          <span className="button__text-inner">Professional</span>
+          <span className="button__text-inner">Pro</span>
         </a>
         <a ref={link2} href="/html/" onPointerEnter={(e) => {
-          calculLock(link2)
+          lock(link2)
         }} onPointerOut={(e) => {
           setHover(false)
         }}>
@@ -70,7 +69,7 @@ export default function Scene({ cursorPosition }) {
         </a>
         </nav>
       </Html>
-      <Cursor cursorPosition={hover ? cursorLink : cursorPosition} />
+      <Cursor cursorPosition={hover ? cursorLink : cursorPosition} hover={hover} />
       <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />
       <line position={[0, 0, 0.00001]} geometry={lineGeometry}>
         <lineBasicMaterial attach="material" color={'#9c88ff'} linewidth={1} linecap={'round'} linejoin={'round'} />

@@ -7,20 +7,27 @@ export class CursorShaderMaterial extends THREE.ShaderMaterial {
       uniforms: {
         uVeloX: { value: 0.0 },
         uVeloY: { value: 0.0 },
+        uHover: { value: 0.0 },
+        uTime: { value: 0 },
       },
       vertexShader: `
       varying vec2 vUv;
+      uniform float uHover;
       uniform float uVeloX;
       uniform float uVeloY;
+      uniform float uTime;
       void main() {
-        vec3 pos = position * (1.0 - (0.25 * uVeloX + 0.25 * uVeloY));
         vUv = uv;
+        vec3 pos = position * uHover * (1.0 - (0.25 * uVeloX + 0.25 * uVeloY));
+        pos.x += (1.0 - uHover) * sin(pos.y*5.0+uTime)/100.0;
+        pos.y += (1.0 - uHover) * sin(pos.x*5.0+uTime)/100.0;
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.);
       }`,
       fragmentShader: `
       varying vec2 vUv;
       uniform float uVeloX;
       uniform float uVeloY;
+      uniform float uHover;
       void main()  {
           vec2 newUV = vUv;
           gl_FragColor = vec4(1.0 - 0.022 * uVeloY * uVeloX, 1.0 - 0.965 * uVeloY * uVeloX, 1.0 - 0.744 * uVeloY * uVeloX, 1.0);
@@ -38,6 +45,18 @@ export class CursorShaderMaterial extends THREE.ShaderMaterial {
   }
   set uVeloY(v) {
     return (this.uniforms.uVeloY.value = v)
+  }
+  get uHover() {
+    return this.uniforms.uHover.value
+  }
+  set uHover(v) {
+    return (this.uniforms.uHover.value = v)
+  }
+  get uTime() {
+    return this.uniforms.uTime.value
+  }
+  set uTime(v) {
+    return (this.uniforms.uTime.value = v)
   }
 }
 

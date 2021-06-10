@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import './shaders/CursorShaderMaterial'
+import { TweenMax as TM } from 'gsap'
 
-export default function Cursor({ cursorPosition }) {
+export default function Cursor({ cursorPosition, hover }) {
   const viewport = useThree((state) => state.viewport)
   const ref = useRef()
   const material = useRef()
@@ -10,8 +11,14 @@ export default function Cursor({ cursorPosition }) {
   const lastMouseX = useRef(null);
 
   useFrame((state, delta) => {
-    ref.current.position.x = viewport.width * ( 2 * cursorPosition.current.x - 1) / 2
-    ref.current.position.y = - viewport.height * ( 2 * cursorPosition.current.y - 1) / 2
+    material.current.uTime += delta
+    TM.to(ref.current.position, 0.3, {
+      x: viewport.width * ( 2 * cursorPosition.current.x - 1) / 2,
+      y: - viewport.height * ( 2 * cursorPosition.current.y - 1) / 2
+    })
+    TM.to(material.current, 0.3, {
+      uHover: hover ? 2.0 : 1.0
+    })
     if (lastMouseX.current === null) {
         lastMouseX.current = state.mouse.x
         lastMouseY.current = state.mouse.y
