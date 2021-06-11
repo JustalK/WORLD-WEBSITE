@@ -30,7 +30,7 @@ export class CursorShaderMaterial extends THREE.ShaderMaterial {
       uniform float uHover;
       void main()  {
           vec2 newUV = vUv;
-          gl_FragColor = vec4(1.0 - 0.022 * uVeloY * uVeloX, 1.0 - 0.965 * uVeloY * uVeloX, 1.0 - 0.744 * uVeloY * uVeloX, 1.0);
+          gl_FragColor = vec4(1.0 - 0.022 * uVeloY * uVeloX - 0.022 * (uHover - 1.0), 1.0 - 0.965 * uVeloY * uVeloX - 0.965 * (uHover - 1.0), 1.0 - 0.744 * uVeloY * uVeloX - 0.744 * (uHover - 1.0), 1.0);
       }`
     })
   }

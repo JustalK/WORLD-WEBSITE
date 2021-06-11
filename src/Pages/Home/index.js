@@ -7,7 +7,7 @@ export default function Experience() {
   const cursorPosition = useRef({x: 0, y:0})
   return (
     <div id="canvas-container" onPointerMove={(e) => {
-      TM.to(cursorPosition.current, 0.3, {
+      TM.to(cursorPosition.current, 0.0, {
         x: e.clientX/window.innerWidth,
         y: e.clientY/window.innerHeight
       })

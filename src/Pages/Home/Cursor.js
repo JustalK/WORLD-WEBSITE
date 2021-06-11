@@ -3,16 +3,23 @@ import { useFrame, useThree } from '@react-three/fiber'
 import './shaders/CursorShaderMaterial'
 import { TweenMax as TM } from 'gsap'
 
-export default function Cursor({ cursorPosition, hover }) {
+export default function Cursor({ cursorPosition, hover, realCursor }) {
   const viewport = useThree((state) => state.viewport)
   const ref = useRef()
+  const miniref = useRef()
   const material = useRef()
+  const minimaterial = useRef()
   const lastMouseY = useRef(null);
   const lastMouseX = useRef(null);
 
   useFrame((state, delta) => {
     material.current.uTime += delta
-    TM.to(ref.current.position, 0.3, {
+    minimaterial.current.uTime += delta
+    TM.to(miniref.current.position, 0.1, {
+      x: viewport.width * ( 2 * realCursor.current.x - 1) / 2,
+      y: - viewport.height * ( 2 * realCursor.current.y - 1) / 2
+    })
+    TM.to(ref.current.position, 0.75, {
       x: viewport.width * ( 2 * cursorPosition.current.x - 1) / 2,
       y: - viewport.height * ( 2 * cursorPosition.current.y - 1) / 2
     })
@@ -37,9 +44,15 @@ export default function Cursor({ cursorPosition, hover }) {
   })
 
   return (
-    <mesh ref={ref} position={[0, 0, 0.0001]}>
-      <circleGeometry args={[0.05, 32]} />
-      <cursorShaderMaterial ref={material} color={"#ffffff"} />
-    </mesh>
+    <>
+      <mesh ref={ref} position={[0, 0, 0.0001]}>
+        <circleGeometry args={[0.05, 32]} />
+        <cursorShaderMaterial ref={material} color={"#ffffff"} />
+      </mesh>
+      <mesh ref={miniref} position={[0, 0, 0.0005]}>
+        <circleGeometry args={[0.009, 32]} />
+        <meshBasicMaterial ref={minimaterial} color={"#ffffff"} />
+      </mesh>
+    </>
   )
 }

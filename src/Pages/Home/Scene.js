@@ -69,7 +69,7 @@ export default function Scene({ cursorPosition }) {
         </a>
         </nav>
       </Html>
-      <Cursor cursorPosition={hover ? cursorLink : cursorPosition} hover={hover} />
+      <Cursor cursorPosition={hover ? cursorLink : cursorPosition} realCursor={cursorPosition} hover={hover} />
       <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />
       <line position={[0, 0, 0.00001]} geometry={lineGeometry}>
         <lineBasicMaterial attach="material" color={'#9c88ff'} linewidth={1} linecap={'round'} linejoin={'round'} />
