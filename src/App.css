@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap');
 
 #canvas-container {
   width: 100%;
@@ -26,14 +27,40 @@ nav {
   transform: translateX(-50%);
 }
 
-a {
+nav a {
   padding: 50px;
   text-decoration: none;
   color: white;
   line-height: 100px;
-  cursor: none;  
+  cursor: none;
 }
 
 span {
   pointer-events: none;
+}
+
+.visit {
+  width: 275px;
+  height: 300px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visit > span {
+  width: 75px;
+  height: 75px;
+  display: block;
+  border-radius: 50%;
+  border: 1px solid #9c88ff;
+}
+
+.visit > span > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: 'Barlow', sans-serif;
 }

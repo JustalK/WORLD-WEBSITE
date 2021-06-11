@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react'
+import React, { useRef, useState, useCallback, useEffect } from 'react'
 import Image from '../../components/Image'
 import Cursor from '../../components/Cursor'
 import { useThree, useFrame } from '@react-three/fiber'
@@ -10,13 +10,29 @@ import * as THREE from 'three'
 export default function Scene({ cursorPosition }) {
   const viewport = useThree((state) => state.viewport)
   const material = useRef()
+  const outside = useRef()
+  const outsideTransform = useRef({x: 0, y:0})
   const link1 = useRef()
   const link2 = useRef()
+  const centerButton = useRef({x: 0, y:0})
   const cursorLink = useRef({x: 0, y:0})
   const [hover, setHover] = useState(false)
 
+  useEffect(() => {
+    const left = outside.current.getBoundingClientRect().left
+    const width = outside.current.getBoundingClientRect().width
+    const top = outside.current.getBoundingClientRect().top
+    const height = outside.current.getBoundingClientRect().height
+    const centerX = left + width/2
+    const centerY = top + height/2
+    centerButton.current = {x: centerX, y: centerY}
+  })
+
   useFrame((state, delta) => {
     material.current.uTime += delta
+    if(outsideTransform.current.x !== 0 && outsideTransform.current.y !== 0) {
+      outside.current.style.transform = `translate3d(${outsideTransform.current.x}px, ${outsideTransform.current.y}px, 0)`;
+    }
   })
 
   const nbrPoints = 100
@@ -53,21 +69,40 @@ export default function Scene({ cursorPosition }) {
       </Html>
       <Html position={[0, 1.05 * viewport.height / 2, 0]} style={{width: '100vw'}} center >
         <nav>
-        <a ref={link1} href="/html/" onPointerEnter={(e) => {
-          lock(link1)
-        }} onPointerOut={(e) => {
-          setHover(false)
-        }}>
-          <span className="button__text-inner">Pro</span>
-        </a>
-        <a ref={link2} href="/html/" onPointerEnter={(e) => {
-          lock(link2)
-        }} onPointerOut={(e) => {
-          setHover(false)
-        }}>
-          <span className="button__text-inner">Life</span>
-        </a>
+          <a ref={link1} href="/html/" onPointerEnter={(e) => {
+            lock(link1)
+          }} onPointerOut={(e) => {
+            setHover(false)
+          }}>
+            <span className="button__text-inner">Pro</span>
+          </a>
+          <a ref={link2} href="/html/" onPointerEnter={(e) => {
+            lock(link2)
+          }} onPointerOut={(e) => {
+            setHover(false)
+          }}>
+            <span className="button__text-inner">Life</span>
+          </a>
         </nav>
+      </Html>
+      <Html position={[0, -0.75 * viewport.height / 2, 0.1]} center >
+        <a className="visit" href="/html/" onPointerMove={(e) => {
+          const a = e.clientX - centerButton.current.x
+          const b = e.clientY - centerButton.current.y
+          TM.to(outsideTransform.current, 0.2, {
+            x: a * 0.35,
+            y: b * 0.35
+          })
+        }} onPointerOut={(e) => {
+          TM.to(outsideTransform.current, 0.2, {
+            x: 0,
+            y: 0
+          })
+        }}>
+          <span ref={outside}>
+            <span>VIEW</span>
+          </span>
+        </a>
       </Html>
       <Cursor cursorPosition={hover ? cursorLink : cursorPosition} realCursor={cursorPosition} hover={hover} />
       <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />
