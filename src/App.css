@@ -48,6 +48,44 @@ span {
   justify-content: center;
 }
 
+@keyframes ani {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+
+@keyframes ani2 {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+.visit > span::after {
+  display: block;
+  width: 100%;
+  height: 100%;
+  content: ' ';
+  background: #60009957;
+  mask: url("mask.png");
+  mask-size: 7100% 100%;
+  animation: ani 0.7s steps(70) forwards;
+  border-radius: 50%;
+}
+
+.visit:hover > span::after {
+  animation: ani2 0.7s steps(70) forwards;
+}
+
 .visit > span {
   width: 75px;
   height: 75px;
@@ -58,6 +96,7 @@ span {
 
 .visit > span > span {
   position: absolute;
+  z-index: 2;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
