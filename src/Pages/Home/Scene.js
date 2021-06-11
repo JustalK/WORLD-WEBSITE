@@ -1,10 +1,10 @@
 import React, { useRef, useState, useCallback } from 'react'
-import Image from './Image'
-import Cursor from './Cursor'
+import Image from '../../components/Image'
+import Cursor from '../../components/Cursor'
 import { useThree, useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import { TweenMax as TM } from 'gsap'
-import './shaders/BackgroundShaderMaterial'
+import '../../shaders/BackgroundShaderMaterial'
 import * as THREE from 'three'
 
 export default function Scene({ cursorPosition }) {

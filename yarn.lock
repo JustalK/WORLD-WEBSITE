@@ -7560,6 +7560,11 @@
   "resolved" "https://registry.npmjs.org/mmd-parser/-/mmd-parser-1.0.4.tgz"
   "version" "1.0.4"
 
+"module-alias@^2.2.2":
+  "integrity" "sha512-A/78XjoX2EmNvppVWEhM2oGk3x4lLxnkEA4jTbaK97QKSDjkIoOsKQlfylt/d3kKKi596Qy3NP5XrXJ6fZIC9Q=="
+  "resolved" "https://registry.npmjs.org/module-alias/-/module-alias-2.2.2.tgz"
+  "version" "2.2.2"
+
 "move-concurrently@^1.0.1":
   "integrity" "sha1-viwAX9oy4LKa8fBdfEszIUxwH5I="
   "resolved" "https://registry.npmjs.org/move-concurrently/-/move-concurrently-1.0.1.tgz"
