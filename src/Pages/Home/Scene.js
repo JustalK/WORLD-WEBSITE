@@ -4,8 +4,9 @@ import Cursor from '../../components/Cursor'
 import { useThree, useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import { TweenMax as TM } from 'gsap'
-import '../../shaders/BackgroundShaderMaterial'
 import * as THREE from 'three'
+import Splitting from 'splitting'
+import '../../shaders/BackgroundShaderMaterial'
 
 export default function Scene({ cursorPosition }) {
   const viewport = useThree((state) => state.viewport)
@@ -26,6 +27,7 @@ export default function Scene({ cursorPosition }) {
     const centerX = left + width/2
     const centerY = top + height/2
     centerButton.current = {x: centerX, y: centerY}
+    Splitting()
   })
 
   useFrame((state, delta) => {
@@ -83,7 +85,25 @@ export default function Scene({ cursorPosition }) {
           }}>
             <span className="button__text-inner">Life</span>
           </a>
-        </nav>
+          </nav>
+      </Html>
+      <Html position={[0.32 * viewport.width, -0.25 * viewport.height / 2, 0]} style={{'pointerEvents': 'none', width: '300px'}} center >
+        <span className="summary" data-splitting="">This website has been made for keeping the different aspect of my life in one single place. From here, you can discover either my work life or few of my creation more personnal.</span>
+      </Html>
+      <Html position={[0.42 * viewport.width, -0.42 * viewport.height / 2, 0]} style={{'pointerEvents': 'none', width: '300px'}} center >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="cursor-pointer"
+          fill="none"
+          viewBox="-4 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M10 8l4 4m0 0l-4 4m4-4H3"
+          />
+        </svg>
       </Html>
       <Html position={[0, -0.75 * viewport.height / 2, 0.1]} center >
         <a className="visit" href="/html/" onPointerMove={(e) => {

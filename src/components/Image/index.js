@@ -10,7 +10,7 @@ export default function Image({ position }) {
   const back = useRef()
   const mesh = useRef()
   const [hover, setHover] = useState(false)
-  const [tDiffuse] = useLoader(THREE.TextureLoader, ['./1.jpeg'])
+  const [tDiffuse] = useLoader(THREE.TextureLoader, ['./2.jpg'])
 
   useFrame((state, delta) => {
     ref.current.uTime += delta

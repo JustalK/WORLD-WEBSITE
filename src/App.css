@@ -35,8 +35,26 @@ nav a {
   cursor: none;
 }
 
-span {
+nav span {
   pointer-events: none;
+}
+
+.summary {
+  color: white;
+  font-family: 'Barlow', sans-serif;
+}
+
+.summary .word:hover {
+  color: red;
+}
+
+.summary .char:hover {
+  color: black;
+}
+
+.cursor-pointer {
+  transform: scale(0.15);
+  color: white;
 }
 
 .visit {
