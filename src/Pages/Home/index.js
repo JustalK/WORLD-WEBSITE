@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import Scene from './Scene'
 import { TweenMax as TM } from 'gsap'
 
-export default function Experience() {
+export default function Home() {
   const cursorPosition = useRef({x: 0, y:0})
   return (
     <div id="canvas-container" onPointerMove={(e) => {

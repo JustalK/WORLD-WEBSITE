@@ -52,11 +52,6 @@ nav span {
   color: black;
 }
 
-.cursor-pointer {
-  transform: scale(0.15);
-  color: white;
-}
-
 .visit {
   width: 275px;
   height: 300px;
@@ -120,4 +115,16 @@ nav span {
   transform: translate(-50%, -50%);
   color: white;
   font-family: 'Barlow', sans-serif;
+}
+
+.nextPage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: white;
+  cursor: none;
+}
+
+.nextPage svg {
+  pointer-events: none;
 }

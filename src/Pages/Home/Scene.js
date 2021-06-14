@@ -6,7 +6,9 @@ import { Html } from '@react-three/drei'
 import { TweenMax as TM } from 'gsap'
 import * as THREE from 'three'
 import Splitting from 'splitting'
+import {ROUTE_ABOUT} from '../../Constants/Routes'
 import '../../shaders/BackgroundShaderMaterial'
+
 
 export default function Scene({ cursorPosition }) {
   const viewport = useThree((state) => state.viewport)
@@ -15,6 +17,7 @@ export default function Scene({ cursorPosition }) {
   const outsideTransform = useRef({x: 0, y:0})
   const link1 = useRef()
   const link2 = useRef()
+  const link3 = useRef()
   const centerButton = useRef({x: 0, y:0})
   const cursorLink = useRef({x: 0, y:0})
   const [hover, setHover] = useState(false)
@@ -90,20 +93,25 @@ export default function Scene({ cursorPosition }) {
       <Html position={[0.32 * viewport.width, -0.25 * viewport.height / 2, 0]} style={{'pointerEvents': 'none', width: '300px'}} center >
         <span className="summary" data-splitting="">This website has been made for keeping the different aspect of my life in one single place. From here, you can discover either my work life or few of my creation more personnal.</span>
       </Html>
-      <Html position={[0.42 * viewport.width, -0.42 * viewport.height / 2, 0]} style={{'pointerEvents': 'none', width: '300px'}} center >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="cursor-pointer"
-          fill="none"
-          viewBox="-4 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M10 8l4 4m0 0l-4 4m4-4H3"
-          />
-        </svg>
+      <Html position={[0.42 * viewport.width, -0.42 * viewport.height / 2, 0]} style={{width: '35px'}} center >
+        <a ref={link3} className="nextPage" href={ROUTE_ABOUT} onPointerEnter={(e) => {
+          lock(link3)
+        }} onPointerOut={(e) => {
+          setHover(false)
+        }}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="-4 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M10 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </a>
       </Html>
       <Html position={[0, -0.75 * viewport.height / 2, 0.1]} center >
         <a className="visit" href="/html/" onPointerMove={(e) => {
