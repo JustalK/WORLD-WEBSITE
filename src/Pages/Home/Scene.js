@@ -10,7 +10,7 @@ import {ROUTE_ABOUT} from '../../Constants/Routes'
 import '../../shaders/BackgroundShaderMaterial'
 
 
-export default function Scene({ cursorPosition }) {
+export default function Scene({ cursorPosition, history }) {
   const viewport = useThree((state) => state.viewport)
   const material = useRef()
   const outside = useRef()
@@ -94,10 +94,12 @@ export default function Scene({ cursorPosition }) {
         <span className="summary" data-splitting="">This website has been made for keeping the different aspect of my life in one single place. From here, you can discover either my work life or few of my creation more personnal.</span>
       </Html>
       <Html position={[0.42 * viewport.width, -0.42 * viewport.height / 2, 0]} style={{width: '35px'}} center >
-        <a ref={link3} className="nextPage" href={ROUTE_ABOUT} onPointerEnter={(e) => {
+        <div ref={link3} className="nextPage" onPointerEnter={(e) => {
           lock(link3)
         }} onPointerOut={(e) => {
           setHover(false)
+        }} onClick={() => {
+          history.push(ROUTE_ABOUT)
         }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +113,7 @@ export default function Scene({ cursorPosition }) {
               d="M10 8l4 4m0 0l-4 4m4-4H3"
             />
           </svg>
-        </a>
+        </div>
       </Html>
       <Html position={[0, -0.75 * viewport.height / 2, 0.1]} center >
         <a className="visit" href="/html/" onPointerMove={(e) => {

@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import Scene from './Scene'
 import { TweenMax as TM } from 'gsap'
 
-export default function Home() {
+export default function Home({ history }) {
   const cursorPosition = useRef({x: 0, y:0})
   return (
     <div id="canvas-container" onPointerMove={(e) => {
@@ -15,7 +15,7 @@ export default function Home() {
       <Canvas camera={{ position: [0, 0, 2], fov: 50 }}>
         <Suspense fallback={null}>
           <ambientLight intensity={1.0} />
-          <Scene cursorPosition={cursorPosition} />
+          <Scene cursorPosition={cursorPosition} history={history} />
         </Suspense>
       </Canvas>
     </div>
