@@ -4,6 +4,7 @@ import Cursor from '../../components/Molecules/Cursor'
 import MagneticLink from '../../components/Molecules/MagneticLink'
 import FloatingLink from '../../components/Molecules/FloatingLink'
 import BackgroundAnimated from '../../components/Molecules/BackgroundAnimated'
+import Arrow from '../../components/Molecules/Arrow'
 import { useThree, useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import * as THREE from 'three'
@@ -53,18 +54,7 @@ export default function Scene({ cursorPosition, history }) {
       </Html>
       <Html position={[0.42 * viewport.width, -0.42 * viewport.height / 2, 0]} style={{width: '60px', height: '60px'}} center >
         <MagneticLink className="nextPage" cursorLink={cursorLinkRef} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_ABOUT}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="-4 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M10 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
+          <Arrow />
         </MagneticLink>
       </Html>
       <Html position={[0, -0.75 * viewport.height / 2, 0.1]} center >
