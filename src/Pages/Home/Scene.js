@@ -3,11 +3,11 @@ import Image from '../../components/Molecules/Image'
 import Cursor from '../../components/Molecules/Cursor'
 import MagneticLink from '../../components/Molecules/MagneticLink'
 import FloatingLink from '../../components/Molecules/FloatingLink'
+import Lines from '../../components/Molecules/Lines'
 import BackgroundAnimated from '../../components/Molecules/BackgroundAnimated'
 import Arrow from '../../components/Molecules/Arrow'
 import { useThree, useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
-import * as THREE from 'three'
 import Splitting from 'splitting'
 import {ROUTE_ABOUT} from '../../Constants/Routes'
 
@@ -26,17 +26,6 @@ export default function Scene({ cursorPosition, history }) {
     backgroundRef.current.uTime += delta
     loatingViewRef.current.getOutside().style.transform = `translate3d(${loatingViewRef.current.getOutsideTransform().x}px, ${loatingViewRef.current.getOutsideTransform().y}px, 0)`;
   })
-
-  const nbrPoints = 100
-  const curve = new THREE.SplineCurve( [
-    new THREE.Vector2( -viewport.width/2, 0.1 * viewport.height/2),
-    new THREE.Vector2( - 0.5 * viewport.width/2, 0.7 * viewport.height/2),
-    new THREE.Vector2( 0, 0 ),
-    new THREE.Vector2( 0.25 * viewport.width/2, -0.6 * viewport.height/2),
-    new THREE.Vector2( 0.6 * viewport.width/2, viewport.height/2),
-  ]);
-  const points = curve.getPoints( nbrPoints );
-  const lineGeometry = new THREE.BufferGeometry().setFromPoints( points );
 
   return (
     <>
@@ -62,9 +51,7 @@ export default function Scene({ cursorPosition, history }) {
       </Html>
       <Cursor cursorPosition={hover ? cursorLinkRef : cursorPosition} realCursor={cursorPosition} hover={hover} />
       <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />
-      <line position={[0, 0, 0.00001]} geometry={lineGeometry}>
-        <lineBasicMaterial attach="material" color={'#9c88ff'} linewidth={1} linecap={'round'} linejoin={'round'} />
-      </line>
+      <Lines viewport={viewport} />
       <BackgroundAnimated ref={backgroundRef} viewport={viewport} />
     </>
   )
