@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
 import { TweenMax as TM } from 'gsap'
+import Text from '../../Atoms/Text'
+import Link from '../../Atoms/Link'
 
-const FloatingLink = forwardRef(({children, className}, ref) => {
+const FloatingLink = forwardRef(({children, className, history, to}, ref) => {
   const centerButton = useRef({x: 0, y:0})
   const outside = useRef('translate3d(0px, 0px, 0)')
   const outsideTransform = useRef({x: 0, y:0})
@@ -26,7 +28,7 @@ const FloatingLink = forwardRef(({children, className}, ref) => {
   })
 
   return (
-    <a className="visit" href="/html/" onPointerMove={(e) => {
+    <Link className="visit" onPointerMove={(e) => {
       const a = e.clientX - centerButton.current.x
       const b = e.clientY - centerButton.current.y
       TM.to(outsideTransform.current, 0.2, {
@@ -38,11 +40,13 @@ const FloatingLink = forwardRef(({children, className}, ref) => {
         x: 0,
         y: 0
       })
+    }} onClick={() => {
+      history.push(to)
     }}>
-      <span ref={outside}>
-        <span>VIEW</span>
-      </span>
-    </a>
+      <Text ref={outside}>
+        <Text>VIEW</Text>
+      </Text>
+    </Link>
   )
 })
 

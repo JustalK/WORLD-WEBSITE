@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
-export default function Text({children, className}) {
+const Text = forwardRef(({children, className}, ref) => {
   return (
-    <span className={className}>
+    <span ref={ref} className={className}>
       {children}
     </span>
   )
-}
+})
+
+export default Text;

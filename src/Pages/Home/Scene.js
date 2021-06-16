@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import Image from '../../components/Image'
+import Image from '../../components/Molecules/Image'
 import Cursor from '../../components/Molecules/Cursor'
 import MagneticLink from '../../components/Molecules/MagneticLink'
 import FloatingLink from '../../components/Molecules/FloatingLink'
@@ -69,7 +69,7 @@ export default function Scene({ cursorPosition, history }) {
         </MagneticLink>
       </Html>
       <Html position={[0, -0.75 * viewport.height / 2, 0.1]} center >
-        <FloatingLink ref={loatingViewRef}>VIEW</FloatingLink>
+        <FloatingLink ref={loatingViewRef} history={history} to={ROUTE_ABOUT}>VIEW</FloatingLink>
       </Html>
       <Cursor cursorPosition={hover ? cursorLinkRef : cursorPosition} realCursor={cursorPosition} hover={hover} />
       <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />
