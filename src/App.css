@@ -30,7 +30,8 @@ nav {
   transform: translateX(-50%);
 }
 
-nav a {
+nav div {
+  display: inline;
   padding: 50px;
   text-decoration: none;
   color: white;

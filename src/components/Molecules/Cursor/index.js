@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
-import '../../shaders/CursorShaderMaterial'
+import '../../../shaders/CursorShaderMaterial'
 import { TweenMax as TM } from 'gsap'
 
 export default function Cursor({ cursorPosition, hover, realCursor }) {
