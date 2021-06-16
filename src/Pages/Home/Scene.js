@@ -3,19 +3,18 @@ import Image from '../../components/Molecules/Image'
 import Cursor from '../../components/Molecules/Cursor'
 import MagneticLink from '../../components/Molecules/MagneticLink'
 import FloatingLink from '../../components/Molecules/FloatingLink'
+import BackgroundAnimated from '../../components/Molecules/BackgroundAnimated'
 import { useThree, useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
-import { TweenMax as TM } from 'gsap'
 import * as THREE from 'three'
 import Splitting from 'splitting'
 import {ROUTE_ABOUT} from '../../Constants/Routes'
-import '../../shaders/BackgroundShaderMaterial'
 
 export default function Scene({ cursorPosition, history }) {
   const viewport = useThree((state) => state.viewport)
   const loatingViewRef = useRef()
   const cursorLinkRef = useRef({x: 0, y:0})
-  const material = useRef()
+  const backgroundRef = useRef()
   const [hover, setHover] = useState(false)
 
   useEffect(() => {
@@ -23,7 +22,7 @@ export default function Scene({ cursorPosition, history }) {
   })
 
   useFrame((state, delta) => {
-    material.current.uTime += delta
+    backgroundRef.current.uTime += delta
     loatingViewRef.current.getOutside().style.transform = `translate3d(${loatingViewRef.current.getOutsideTransform().x}px, ${loatingViewRef.current.getOutsideTransform().y}px, 0)`;
   })
 
@@ -76,15 +75,7 @@ export default function Scene({ cursorPosition, history }) {
       <line position={[0, 0, 0.00001]} geometry={lineGeometry}>
         <lineBasicMaterial attach="material" color={'#9c88ff'} linewidth={1} linecap={'round'} linejoin={'round'} />
       </line>
-      <mesh position={[0, 0, 0]} onPointerMove={(e) => {
-          TM.to(material.current.uMouse, 0.5, {
-            x: e.intersections[0].uv.x,
-            y: e.intersections[0].uv.y
-          })
-        }}>
-        <planeGeometry args={[viewport.width, viewport.height]} />
-        <backgroundShaderMaterial ref={material} />
-      </mesh>
+      <BackgroundAnimated ref={backgroundRef} viewport={viewport} />
     </>
   )
 }
