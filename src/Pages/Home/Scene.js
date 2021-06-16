@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Image from '../../components/Image'
 import Cursor from '../../components/Molecules/Cursor'
-import MagneticCursorLink from '../../components/Molecules/MagneticCursorLink'
+import MagneticLink from '../../components/Molecules/MagneticLink'
+import FloatingLink from '../../components/Molecules/FloatingLink'
 import { useThree, useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import { TweenMax as TM } from 'gsap'
@@ -12,29 +13,18 @@ import '../../shaders/BackgroundShaderMaterial'
 
 export default function Scene({ cursorPosition, history }) {
   const viewport = useThree((state) => state.viewport)
+  const loatingViewRef = useRef()
+  const cursorLinkRef = useRef({x: 0, y:0})
   const material = useRef()
-  const outside = useRef()
-  const outsideTransform = useRef({x: 0, y:0})
-  const centerButton = useRef({x: 0, y:0})
-  const cursorLink = useRef({x: 0, y:0})
   const [hover, setHover] = useState(false)
 
   useEffect(() => {
-    const left = outside.current.getBoundingClientRect().left
-    const width = outside.current.getBoundingClientRect().width
-    const top = outside.current.getBoundingClientRect().top
-    const height = outside.current.getBoundingClientRect().height
-    const centerX = left + width/2
-    const centerY = top + height/2
-    centerButton.current = {x: centerX, y: centerY}
     Splitting()
   })
 
   useFrame((state, delta) => {
     material.current.uTime += delta
-    if(outsideTransform.current.x !== 0 && outsideTransform.current.y !== 0) {
-      outside.current.style.transform = `translate3d(${outsideTransform.current.x}px, ${outsideTransform.current.y}px, 0)`;
-    }
+    loatingViewRef.current.getOutside().style.transform = `translate3d(${loatingViewRef.current.getOutsideTransform().x}px, ${loatingViewRef.current.getOutsideTransform().y}px, 0)`;
   })
 
   const nbrPoints = 100
@@ -55,15 +45,15 @@ export default function Scene({ cursorPosition, history }) {
       </Html>
       <Html position={[0, 1.05 * viewport.height / 2, 0]} style={{width: '100vw'}} center >
         <nav>
-          <MagneticCursorLink cursorLink={cursorLink} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_ABOUT}>Pro</MagneticCursorLink>
-          <MagneticCursorLink cursorLink={cursorLink} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_ABOUT}>Life</MagneticCursorLink>
+          <MagneticLink cursorLink={cursorLinkRef} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_ABOUT}>Pro</MagneticLink>
+          <MagneticLink cursorLink={cursorLinkRef} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_ABOUT}>Life</MagneticLink>
         </nav>
       </Html>
       <Html position={[0.32 * viewport.width, -0.25 * viewport.height / 2, 0]} style={{'pointerEvents': 'none', width: '300px'}} center >
         <span className="summary" data-splitting="">This website has been made for keeping the different aspect of my life in one single place. From here, you can discover either my work life or few of my creation more personnal.</span>
       </Html>
       <Html position={[0.42 * viewport.width, -0.42 * viewport.height / 2, 0]} style={{width: '60px', height: '60px'}} center >
-        <MagneticCursorLink className="nextPage" cursorLink={cursorLink} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_ABOUT}>
+        <MagneticLink className="nextPage" cursorLink={cursorLinkRef} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_ABOUT}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -76,28 +66,12 @@ export default function Scene({ cursorPosition, history }) {
               d="M10 8l4 4m0 0l-4 4m4-4H3"
             />
           </svg>
-        </MagneticCursorLink>
+        </MagneticLink>
       </Html>
       <Html position={[0, -0.75 * viewport.height / 2, 0.1]} center >
-        <a className="visit" href="/html/" onPointerMove={(e) => {
-          const a = e.clientX - centerButton.current.x
-          const b = e.clientY - centerButton.current.y
-          TM.to(outsideTransform.current, 0.2, {
-            x: a * 0.35,
-            y: b * 0.35
-          })
-        }} onPointerOut={(e) => {
-          TM.to(outsideTransform.current, 0.2, {
-            x: 0,
-            y: 0
-          })
-        }}>
-          <span ref={outside}>
-            <span>VIEW</span>
-          </span>
-        </a>
+        <FloatingLink ref={loatingViewRef}>VIEW</FloatingLink>
       </Html>
-      <Cursor cursorPosition={hover ? cursorLink : cursorPosition} realCursor={cursorPosition} hover={hover} />
+      <Cursor cursorPosition={hover ? cursorLinkRef : cursorPosition} realCursor={cursorPosition} hover={hover} />
       <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />
       <line position={[0, 0, 0.00001]} geometry={lineGeometry}>
         <lineBasicMaterial attach="material" color={'#9c88ff'} linewidth={1} linecap={'round'} linejoin={'round'} />

@@ -3,7 +3,7 @@ import { TweenMax as TM } from 'gsap'
 import Text from '../../Atoms/Text'
 import Link from '../../Atoms/Link'
 
-export default function MagneticCursorLink({children, className, cursorLink, cursorPosition, setHover, history, to}) {
+export default function MagneticLink({children, className, cursorLink, cursorPosition, setHover, history, to}) {
   const link = useRef()
 
   const lock = useCallback(ref => {
