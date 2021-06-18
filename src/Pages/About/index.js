@@ -1,9 +1,12 @@
 import React from 'react'
+import PageTransition from '../../Transitions/PageTransition'
 
 export default function About() {
   return (
-    <div id="canvas-container">
-    Test
-    </div>
+    <PageTransition>
+      <div id="canvas-container">
+      Test
+      </div>
+    </PageTransition>
   )
 }
