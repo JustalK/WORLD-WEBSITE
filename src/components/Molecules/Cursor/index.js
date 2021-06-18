@@ -3,7 +3,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import '../../../shaders/CursorShaderMaterial'
 import { TweenMax as TM } from 'gsap'
 
-export default function Cursor({ cursorPosition, hover, realCursor }) {
+export default function Cursor({ cursorPosition, hover, realCursor, scrollPosition }) {
   const viewport = useThree((state) => state.viewport)
   const ref = useRef()
   const miniref = useRef()
@@ -17,11 +17,11 @@ export default function Cursor({ cursorPosition, hover, realCursor }) {
     minimaterial.current.uTime += delta
     TM.to(miniref.current.position, 0.1, {
       x: viewport.width * ( 2 * realCursor.current.x - 1) / 2,
-      y: - viewport.height * ( 2 * realCursor.current.y - 1) / 2
+      y: - viewport.height * scrollPosition.current - viewport.height * ( 2 * realCursor.current.y - 1) / 2
     })
     TM.to(ref.current.position, 0.75, {
       x: viewport.width * ( 2 * cursorPosition.current.x - 1) / 2,
-      y: - viewport.height * ( 2 * cursorPosition.current.y - 1) / 2
+      y: - viewport.height * scrollPosition.current - viewport.height * ( 2 * cursorPosition.current.y - 1) / 2
     })
     TM.to(material.current, 0.3, {
       uHover: hover ? 2.0 : 1.0

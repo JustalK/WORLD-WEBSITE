@@ -9,6 +9,15 @@
   z-index: 2;
 }
 
+.scroll {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  top: 0;
+  left: 0;
+}
+
 h1 {
   font-size: 4rem;
   font-weight: 400;
@@ -20,7 +29,7 @@ h1 {
 }
 
 body {
-  cursor: none;
+  //cursor: none;
 }
 
 nav {
