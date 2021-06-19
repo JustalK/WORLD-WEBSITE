@@ -17,6 +17,7 @@
     "react-spring": "^8.0.27",
     "splitting": "^1.0.6",
     "three": "^0.129.0",
+    "troika-three-text": "^0.42.0",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

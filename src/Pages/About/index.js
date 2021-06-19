@@ -12,7 +12,6 @@ export default function About({ history }) {
   const page = 3
   const doScroll = (e) => {
     (scroll.current = page * e.target.scrollTop / (e.target.scrollHeight - window.innerHeight));
-    console.log(scroll.current)
   }
   return (
     <PageTransition>
