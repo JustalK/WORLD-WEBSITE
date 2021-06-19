@@ -18,6 +18,14 @@
   left: 0;
 }
 
+.dark {
+  color: black;
+}
+
+.bg-dark {
+  background: #fbc4a5;
+}
+
 h1 {
   font-size: 4rem;
   font-weight: 400;

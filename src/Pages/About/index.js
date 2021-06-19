@@ -16,7 +16,7 @@ export default function About({ history }) {
   }
   return (
     <PageTransition>
-      <div id="canvas-container">
+      <div id="canvas-container" className="bg-dark">
         <Canvas camera={{ position: [0, 0, 2], fov: 50 }}
           onCreated={(state) => state.events.connect(scrollRef.current)}
           raycaster={{ computeOffsets: ({ clientX, clientY }) => ({ offsetX: clientX, offsetY: clientY }) }}>
