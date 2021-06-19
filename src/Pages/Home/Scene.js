@@ -10,6 +10,7 @@ import { useThree, useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import Splitting from 'splitting'
 import {ROUTE_ABOUT} from '../../Constants/Routes'
+import * as THREE from 'three'
 
 export default function Scene({ cursorPosition, history }) {
   const scrollPosition = useRef(0)
@@ -52,7 +53,13 @@ export default function Scene({ cursorPosition, history }) {
       </Html>
       <Cursor cursorPosition={hover ? cursorLinkRef : cursorPosition} realCursor={cursorPosition} scrollPosition={scrollPosition} hover={hover} />
       <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />
-      <Lines viewport={viewport} />
+      <Lines pointsPosition={[
+        new THREE.Vector2( -viewport.width/2, 0.1 * viewport.height/2),
+        new THREE.Vector2( - 0.5 * viewport.width/2, 0.7 * viewport.height/2),
+        new THREE.Vector2( 0, 0 ),
+        new THREE.Vector2( 0.25 * viewport.width/2, -0.6 * viewport.height/2),
+        new THREE.Vector2( 0.6 * viewport.width/2, viewport.height/2),
+      ]}/>
       <BackgroundAnimated ref={backgroundRef} viewport={viewport} />
     </>
   )

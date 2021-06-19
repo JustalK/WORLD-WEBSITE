@@ -1,15 +1,9 @@
 import React from 'react'
 import * as THREE from 'three'
 
-const Lines = ({children, className, viewport}) => {
+const Lines = ({children, className, pointsPosition}) => {
   const nbrPoints = 100
-  const curve = new THREE.SplineCurve( [
-    new THREE.Vector2( -viewport.width/2, 0.1 * viewport.height/2),
-    new THREE.Vector2( - 0.5 * viewport.width/2, 0.7 * viewport.height/2),
-    new THREE.Vector2( 0, 0 ),
-    new THREE.Vector2( 0.25 * viewport.width/2, -0.6 * viewport.height/2),
-    new THREE.Vector2( 0.6 * viewport.width/2, viewport.height/2),
-  ]);
+  const curve = new THREE.SplineCurve(pointsPosition);
   const points = curve.getPoints( nbrPoints );
   const lineGeometry = new THREE.BufferGeometry().setFromPoints( points );
 
