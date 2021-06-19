@@ -21,7 +21,8 @@ export default function About({ history }) {
           onCreated={(state) => state.events.connect(scrollRef.current)}
           raycaster={{ computeOffsets: ({ clientX, clientY }) => ({ offsetX: clientX, offsetY: clientY }) }}>
           <Suspense fallback={null}>
-            <ambientLight intensity={1.0} />
+            <ambientLight intensity={0.1} />
+            <directionalLight color="white" position={[2, 2, 2]} />
             <ScrollContainer scroll={scroll}>
               <Scene cursorPosition={cursorPosition} scrollPosition={scroll} history={history} />
             </ScrollContainer>
