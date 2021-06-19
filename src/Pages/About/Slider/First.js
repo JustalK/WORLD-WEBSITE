@@ -1,24 +1,18 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { Html } from '@react-three/drei'
+import React, { useRef, useEffect, forwardRef } from 'react'
 import { extend } from '@react-three/fiber'
-import { Text, preloadFont } from "troika-three-text";
+import { Text } from "troika-three-text";
 import BackgroundAnimated from '../../../components/Molecules/BackgroundAnimated'
 import Lines from '../../../components/Molecules/Lines'
+import '../../../shaders/TextShaderMaterial'
 import * as THREE from 'three'
 extend({ Text });
 
-export default function Box({ scrollPosition, viewport, backgroundRef }) {
+const First = forwardRef(({ scrollPosition, viewport, backgroundRef }, nameRef) => {
   const ref = useRef()
-  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    preloadFont({font: "https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxM.woff", characters: 'abcdefghijklmnopqrstuvwxyz'}, () => {
-        setLoaded(true)
-      }
-    )
-
     ref.current.sync();
-  }, [setLoaded])
+  }, [])
 
   return (
     <>
@@ -31,8 +25,11 @@ export default function Box({ scrollPosition, viewport, backgroundRef }) {
         anchorX="center"
         anchorY="middle"
         ref={ref}
+        onPointerMove={(e) => {
+          nameRef.current.uMouse = e.intersections[0].uv
+        }}
       >
-        <meshBasicMaterial />
+        <textShaderMaterial ref={nameRef} />
       </text>
       <Lines pointsPosition={[
         new THREE.Vector2( -1.8, -viewport.height/2),
@@ -43,4 +40,6 @@ export default function Box({ scrollPosition, viewport, backgroundRef }) {
       <BackgroundAnimated ref={backgroundRef} viewport={viewport} />
     </>
   )
-}
+})
+
+export default First
