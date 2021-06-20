@@ -9,8 +9,8 @@ extend({ Text });
 
 const First = forwardRef(({ scrollPosition, viewport, backgroundRef }, ref) => {
   const textRef = useRef()
-  const lineMaterialRef = useRef()
   const textMaterialRef = useRef()
+  const lineMaterialRef = useRef()
 
   useImperativeHandle(ref, () => ({
     lineMaterialRef: () => {

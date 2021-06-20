@@ -20,10 +20,11 @@ export default function Image({ position }) {
 
   return (
     <>
-      <mesh ref={mesh} rotation={[0, 0, 0.05]} onPointerEnter={(e) => setHover(true)} onPointerLeave={(e) => setHover(false)} position={position} onPointerMove={(e) => {
+      <mesh ref={mesh} name="image" rotation={[0, 0, 0.05]} onPointerEnter={(e) => setHover(true)} onPointerLeave={(e) => setHover(false)} position={position} onPointerMove={(e) => {
+        const theImage = e.intersections.find(intersection => intersection.eventObject.name === "image");
         TM.to(ref.current.uMouse, 0.3, {
-          x: e.intersections[0].uv.x,
-          y: e.intersections[0].uv.y
+          x: theImage.uv.x,
+          y: theImage.uv.y
         })
       }}>
         <planeGeometry args={[0.95, 1.2, 32, 32]} />

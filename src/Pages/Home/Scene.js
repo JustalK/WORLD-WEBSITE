@@ -6,11 +6,15 @@ import FloatingLink from '../../components/Molecules/FloatingLink'
 import Lines from '../../components/Molecules/Lines'
 import BackgroundAnimated from '../../components/Molecules/BackgroundAnimated'
 import Arrow from '../../components/Molecules/Arrow'
-import { useThree, useFrame } from '@react-three/fiber'
+import { useThree, useFrame, extend } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import Splitting from 'splitting'
 import {ROUTE_ABOUT} from '../../Constants/Routes'
 import * as THREE from 'three'
+import { Text } from "troika-three-text";
+import '../../shaders/TextShaderMaterial'
+
+extend({ Text });
 
 export default function Scene({ cursorPosition, history }) {
   const scrollPosition = useRef(0)
@@ -19,14 +23,18 @@ export default function Scene({ cursorPosition, history }) {
   const loatingViewRef = useRef()
   const cursorLinkRef = useRef({x: 0, y:0})
   const backgroundRef = useRef()
+  const textRef = useRef()
+  const textMaterialRef = useRef()
   const [hover, setHover] = useState(false)
 
   useEffect(() => {
+    textRef.current.sync();
     Splitting()
   })
 
   useFrame((state, delta) => {
     backgroundRef.current.uTime += delta
+    textMaterialRef.current.uTime += delta
     lineMaterialRef.current.uniforms.dashOffset.value -= 0.01
     loatingViewRef.current.getOutside().style.transform = `translate3d(${loatingViewRef.current.getOutsideTransform().x}px, ${loatingViewRef.current.getOutsideTransform().y}px, 0)`;
   })
@@ -40,9 +48,24 @@ export default function Scene({ cursorPosition, history }) {
         new THREE.Vector3( 0.25 * viewport.width/2, -0.6 * viewport.height/2, 0),
         new THREE.Vector3( 0.6 * viewport.width/2, viewport.height/2, 0),
       ]}/>
-      <Html position={[0, 0.6 * viewport.height / 2, 0]} style={{'pointerEvents': 'none', width: '100vw'}} center >
-        <h1>Any Variation<br />is another world</h1>
-      </Html>
+      <text
+        position={[0, 0.28, 1]}
+        fontSize={0.1}
+        color= "#ffffff"
+        maxWidth={100}
+        lineHeight={1.0}
+        text={"ANY VARIATION\nIS ANOTHER WORLD"}
+        anchorX="center"
+        textAlign="center"
+        font={'/PlayfairDisplay.ttf'}
+        anchorY="middle"
+        ref={textRef}
+        onPointerMove={(e) => {
+          textMaterialRef.current.uMouse = e.intersections[0].uv
+        }}
+      >
+        <textShaderMaterial ref={textMaterialRef} />
+      </text>
       <Html position={[0, 1.05 * viewport.height / 2, 0]} style={{width: '100vw'}} center >
         <nav>
           <MagneticLink cursorLink={cursorLinkRef} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_ABOUT}>Pro</MagneticLink>
