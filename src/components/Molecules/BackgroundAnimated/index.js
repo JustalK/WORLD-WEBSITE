@@ -4,10 +4,11 @@ import '../../../shaders/BackgroundShaderMaterial'
 
 const BackgroundAnimated = forwardRef(({children, className, viewport}, ref) => {
   return (
-    <mesh position={[0, 0, 0]} onPointerMove={(e) => {
+    <mesh name="background" position={[0, 0, 0]} onPointerMove={(e) => {
+      const theBackground = e.intersections.find(intersection => intersection.eventObject.name === "background");
         TM.to(ref.current.uMouse, 0.5, {
-          x: e.intersections[0].uv.x,
-          y: e.intersections[0].uv.y
+          x: theBackground.uv.x,
+          y: theBackground.uv.y
         })
       }}>
       <planeGeometry args={[viewport.width, viewport.height]} />

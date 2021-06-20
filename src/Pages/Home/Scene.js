@@ -26,6 +26,7 @@ export default function Scene({ cursorPosition, history }) {
   const textRef = useRef()
   const textMaterialRef = useRef()
   const [hover, setHover] = useState(false)
+  const [hoverText, setHoverText] = useState(false)
 
   useEffect(() => {
     textRef.current.sync();
@@ -35,6 +36,7 @@ export default function Scene({ cursorPosition, history }) {
   useFrame((state, delta) => {
     backgroundRef.current.uTime += delta
     textMaterialRef.current.uTime += delta
+    textMaterialRef.current.uVelo = hoverText ? Math.min(1.0, textMaterialRef.current.uVelo + 0.05) : Math.max(0.0, textMaterialRef.current.uVelo - 0.05)
     lineMaterialRef.current.uniforms.dashOffset.value -= 0.01
     loatingViewRef.current.getOutside().style.transform = `translate3d(${loatingViewRef.current.getOutsideTransform().x}px, ${loatingViewRef.current.getOutsideTransform().y}px, 0)`;
   })
@@ -60,6 +62,7 @@ export default function Scene({ cursorPosition, history }) {
         font={'/PlayfairDisplay.ttf'}
         anchorY="middle"
         ref={textRef}
+        onPointerEnter={(e) => setHoverText(true)} onPointerLeave={(e) => setHoverText(false)}
         onPointerMove={(e) => {
           textMaterialRef.current.uMouse = e.intersections[0].uv
         }}

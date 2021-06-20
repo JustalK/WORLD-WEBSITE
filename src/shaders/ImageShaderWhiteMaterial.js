@@ -38,9 +38,9 @@ export class ImageShaderWhiteMaterial extends THREE.ShaderMaterial {
       void main()  {
           vec2 newUV = vUv;
           float c = circle(vUv, uMouse, 0.075 + (1.0 - uVelo) * 0.25, 0.01);
-          float r = texture2D(tDiffuse, newUV.xy).x;
-          float g = texture2D(tDiffuse, newUV.xy).y;
-          float b = texture2D(tDiffuse, newUV.xy).z;
+          float r = texture2D(tDiffuse, newUV.xy += c * (0.1 * .2) * uVelo).x;
+          float g = texture2D(tDiffuse, newUV.xy -= c * (0.1 * .2)  * uVelo).y;
+          float b = texture2D(tDiffuse, newUV.xy += c * (0.1 * .2)  * uVelo).z;
           vec4 color = vec4(r * uVelo + r * (1.0 - uVelo), g * (1.0 - uVelo), r * uVelo + b * (1.0 - uVelo), 1.0);
 
           float finalMask = smoothstep(0.4, 0.5, c);

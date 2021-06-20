@@ -32,7 +32,7 @@ export class TextShaderMaterial extends THREE.ShaderMaterial {
       }
       void main()  {
           vec2 newUV = vUv;
-          float c = circle(vUv, uMouse, 2.0 * (1.1 - uVelo), 0.05);
+          float c = circle(vUv, uMouse, 1.0 * (uVelo), 0.05);
 
           float finalMask = smoothstep(0.4, 0.5, c);
 
