@@ -7379,6 +7379,13 @@
   "resolved" "https://registry.npmjs.org/merge2/-/merge2-1.4.1.tgz"
   "version" "1.4.1"
 
+"meshline@^2.0.3":
+  "integrity" "sha512-Xadw4xmmQcSsS636hppJJXkRQBofxU1jP7ptaop7KFUbYrJtN9Av5pKTL10cK8wBh1xAQEzSwD3HQt0YjRV41A=="
+  "resolved" "https://registry.npmjs.org/meshline/-/meshline-2.0.3.tgz"
+  "version" "2.0.3"
+  dependencies:
+    "three" "^0.129.0"
+
 "methods@~1.1.2":
   "integrity" "sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4="
   "resolved" "https://registry.npmjs.org/methods/-/methods-1.1.2.tgz"

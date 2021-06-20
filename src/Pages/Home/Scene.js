@@ -14,6 +14,7 @@ import * as THREE from 'three'
 
 export default function Scene({ cursorPosition, history }) {
   const scrollPosition = useRef(0)
+  const lineMaterialRef = useRef(0)
   const viewport = useThree((state) => state.viewport)
   const loatingViewRef = useRef()
   const cursorLinkRef = useRef({x: 0, y:0})
@@ -26,11 +27,19 @@ export default function Scene({ cursorPosition, history }) {
 
   useFrame((state, delta) => {
     backgroundRef.current.uTime += delta
+    lineMaterialRef.current.uniforms.dashOffset.value -= 0.01
     loatingViewRef.current.getOutside().style.transform = `translate3d(${loatingViewRef.current.getOutsideTransform().x}px, ${loatingViewRef.current.getOutsideTransform().y}px, 0)`;
   })
 
   return (
     <>
+      <Lines ref={lineMaterialRef} pointsPosition={[
+        new THREE.Vector3( -viewport.width/2, 0.1 * viewport.height/2, 0),
+        new THREE.Vector3( - 0.5 * viewport.width/2, 0.7 * viewport.height/2, 0),
+        new THREE.Vector3( 0, 0, 0),
+        new THREE.Vector3( 0.25 * viewport.width/2, -0.6 * viewport.height/2, 0),
+        new THREE.Vector3( 0.6 * viewport.width/2, viewport.height/2, 0),
+      ]}/>
       <Html position={[0, 0.6 * viewport.height / 2, 0]} style={{'pointerEvents': 'none', width: '100vw'}} center >
         <h1>Any Variation<br />is another world</h1>
       </Html>
@@ -53,13 +62,6 @@ export default function Scene({ cursorPosition, history }) {
       </Html>
       <Cursor cursorPosition={hover ? cursorLinkRef : cursorPosition} realCursor={cursorPosition} scrollPosition={scrollPosition} hover={hover} />
       <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />
-      <Lines pointsPosition={[
-        new THREE.Vector2( -viewport.width/2, 0.1 * viewport.height/2),
-        new THREE.Vector2( - 0.5 * viewport.width/2, 0.7 * viewport.height/2),
-        new THREE.Vector2( 0, 0 ),
-        new THREE.Vector2( 0.25 * viewport.width/2, -0.6 * viewport.height/2),
-        new THREE.Vector2( 0.6 * viewport.width/2, viewport.height/2),
-      ]}/>
       <BackgroundAnimated ref={backgroundRef} viewport={viewport} />
     </>
   )
