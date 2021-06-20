@@ -8,15 +8,16 @@ import Second from './Slider/Second'
 export default function Scene({ cursorPosition, scrollPosition, history }) {
   const viewport = useThree((state) => state.viewport)
   const backgroundRef = useRef()
-  const nameRef = useRef()
+  const firstRef = useRef()
 
   useFrame((state, delta) => {
-    nameRef.current.uTime += delta
+    firstRef.current.textMaterialRef().uTime += delta
+    firstRef.current.lineMaterialRef().uniforms.dashOffset.value -= 0.01
   })
 
   return (
     <>
-      <First ref={nameRef} scrollPosition={scrollPosition} viewport={viewport} backgroundRef={backgroundRef} />
+      <First ref={firstRef} scrollPosition={scrollPosition} viewport={viewport} backgroundRef={backgroundRef} />
       <Second text={<h1>2</h1>} color="black" viewport={viewport} position={[0, -viewport.height, 0]} />
       <Page text={<h1>3</h1>} color="red" position={[0, -2 * viewport.height, 0]} />
       <Page text={<h1>4</h1>} color="blue" position={[0, -3 * viewport.height, 0]} />
