@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
-import { extend } from '@react-three/fiber'
+import React, { useRef, useEffect, forwardRef, useImperativeHandle, useState } from 'react'
+import { extend, useFrame } from '@react-three/fiber'
 import { Text } from "troika-three-text";
 import BackgroundAnimated from '../../../components/Molecules/BackgroundAnimated'
 import Lines from '../../../components/Molecules/Lines'
@@ -11,6 +11,7 @@ const First = forwardRef(({ scrollPosition, viewport, backgroundRef }, ref) => {
   const textRef = useRef()
   const textMaterialRef = useRef()
   const lineMaterialRef = useRef()
+  const [hoverText, setHoverText] = useState(false)
 
   useImperativeHandle(ref, () => ({
     lineMaterialRef: () => {
@@ -28,6 +29,10 @@ const First = forwardRef(({ scrollPosition, viewport, backgroundRef }, ref) => {
     textRef.current.sync();
   }, [])
 
+  useFrame((state, delta) => {
+    textMaterialRef.current.uVelo = hoverText ? Math.min(1.0, textMaterialRef.current.uVelo + 0.05) : Math.max(0.0, textMaterialRef.current.uVelo - 0.05)
+  })
+
   return (
     <>
       <text
@@ -40,6 +45,7 @@ const First = forwardRef(({ scrollPosition, viewport, backgroundRef }, ref) => {
         font={'/PlayfairDisplay.ttf'}
         anchorY="middle"
         ref={textRef}
+        onPointerEnter={(e) => setHoverText(true)} onPointerLeave={(e) => setHoverText(false)}
         onPointerMove={(e) => {
           textMaterialRef.current.uMouse = e.intersections[0].uv
         }}
