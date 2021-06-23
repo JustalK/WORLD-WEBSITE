@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react'
-import { extend, useFrame } from '@react-three/fiber'
+import { extend, useFrame, useLoader } from '@react-three/fiber'
 import { Text } from "troika-three-text";
 import * as THREE from 'three'
 import '../../../shaders/ImageNoiseMaterial'
+import '../../../shaders/ImageDisplacementMaterial'
 import Lines from '../../../components/Molecules/Lines'
 extend({ Text });
 
@@ -12,6 +13,7 @@ export default function Second({ text, color, viewport, position }) {
   const descriptionRef = useRef()
   const backgroundRef = useRef()
   const lineMaterialRef = useRef()
+  const [uTexture1, uTexture2, uTextureDisplacement] = useLoader(THREE.TextureLoader, ['./1.jpeg', './2.jpg', './displacement/1.jpg'])
 
   useEffect(() => {
     titleRef.current.sync()
@@ -56,7 +58,7 @@ export default function Second({ text, color, viewport, position }) {
         </text>
         <mesh position={[-0.2, -0.5, 1.1]}>
           <planeGeometry args={[0.5, 0.5, 32]} />
-          <meshBasicMaterial ref={ref} color='#ffffff' />
+          <imageDisplacementMaterial uTexture1={uTexture1} uTexture2={uTexture2} uTextureDisplacement={uTextureDisplacement} />
         </mesh>
         <mesh position={[0.4, -0.7, 0.7]}>
           <planeGeometry args={[0.5, 0.5, 32]} />
