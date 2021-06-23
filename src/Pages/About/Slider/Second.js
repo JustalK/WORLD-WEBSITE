@@ -24,6 +24,7 @@ export default function Second({ text, color, viewport, position }) {
 
   useFrame((state, delta) => {
     backgroundRef.current.uTime += delta
+    blockLeftRef.current.uTime += delta
     lineMaterialRef.current.uniforms.dashOffset.value -= 0.005
   })
 
