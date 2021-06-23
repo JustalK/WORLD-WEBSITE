@@ -8,7 +8,7 @@ export class ImageDisplacementMaterial extends THREE.ShaderMaterial {
         resolution: { value: new THREE.Vector2(window.innerHeight/window.innerWidth,window.innerHeight/window.innerWidth) },
         uTime: { value: 0.0 },
         uEffectFactor: { value: 1.0 },
-        uTextureDisplacementFactor: { value: 0.5 },
+        uTextureDisplacementFactor: { value: 0.0 },
         uTexture1: { value: undefined },
         uTexture2: { value: undefined },
         uTextureDisplacement: { value: undefined },

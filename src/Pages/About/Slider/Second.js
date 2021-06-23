@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { extend, useFrame, useLoader } from '@react-three/fiber'
 import { Text } from "troika-three-text";
 import * as THREE from 'three'
+import { TweenMax as TM } from 'gsap'
 import '../../../shaders/ImageNoiseMaterial'
 import '../../../shaders/ImageDisplacementMaterial'
 import Lines from '../../../components/Molecules/Lines'
@@ -12,6 +13,7 @@ export default function Second({ text, color, viewport, position }) {
   const titleRef = useRef()
   const descriptionRef = useRef()
   const backgroundRef = useRef()
+  const blockLeftRef = useRef()
   const lineMaterialRef = useRef()
   const [uTexture1, uTexture2, uTextureDisplacement] = useLoader(THREE.TextureLoader, ['./1.jpeg', './2.jpg', './displacement/1.jpg'])
 
@@ -56,9 +58,18 @@ export default function Second({ text, color, viewport, position }) {
         >
           <meshBasicMaterial color="#000fff" />
         </text>
-        <mesh position={[-0.2, -0.5, 1.1]}>
+        <mesh position={[-0.2, -0.5, 1.1]} onPointerEnter={() =>
+          TM.to(blockLeftRef.current.uniforms.uTextureDisplacementFactor, 1.6, {
+              value: 1,
+              ease: 'expo.out'
+          })}
+          onPointerOut={() =>
+            TM.to(blockLeftRef.current.uniforms.uTextureDisplacementFactor, 1.6, {
+              value: 0,
+              ease: 'expo.out'
+          })}>
           <planeGeometry args={[0.5, 0.5, 32]} />
-          <imageDisplacementMaterial uTexture1={uTexture1} uTexture2={uTexture2} uTextureDisplacement={uTextureDisplacement} />
+          <imageDisplacementMaterial ref={blockLeftRef} uTexture1={uTexture1} uTexture2={uTexture2} uTextureDisplacement={uTextureDisplacement} />
         </mesh>
         <mesh position={[0.4, -0.7, 0.7]}>
           <planeGeometry args={[0.5, 0.5, 32]} />
