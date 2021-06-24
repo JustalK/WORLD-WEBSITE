@@ -194,6 +194,7 @@ export class ImageDisplacementMaterial extends THREE.ShaderMaterial {
 
         uniform float uTextureDisplacementFactor;
         uniform float uEffectFactor;
+        uniform float uVelo;
 
         void main() {
           vec2 uv = vUv;
@@ -208,7 +209,7 @@ export class ImageDisplacementMaterial extends THREE.ShaderMaterial {
 
           vec4 finalTexture = mix(_texture, _uTexture2, uTextureDisplacementFactor);
 
-          gl_FragColor = finalTexture;
+          gl_FragColor = vec4(finalTexture.x + finalTexture.x * uVelo * 0.4, finalTexture.y + finalTexture.y * uVelo * 0.4, finalTexture.z + finalTexture.z * uVelo * 0.4, 1.0);
         }
       `
     })

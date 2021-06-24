@@ -19,7 +19,7 @@ export default function Scene({ cursorPosition, scrollPosition, history }) {
   return (
     <>
       <First ref={firstRef} viewport={viewport} scrollPosition={scrollPosition} backgroundRef={backgroundRef} />
-      <Second viewport={viewport} position={[0, -viewport.height, 0]} />
+      <Second viewport={viewport} position={[0, -viewport.height, 0]} scrollPosition={scrollPosition} />
       <Third viewport={viewport} position={[0, -2 * viewport.height, 0]} scrollPosition={scrollPosition} />
       <Page text={<h1>4</h1>} color="blue" position={[0, -3 * viewport.height, 0]} />
       <Cursor cursorPosition={cursorPosition} scrollPosition={scrollPosition} realCursor={cursorPosition}/>

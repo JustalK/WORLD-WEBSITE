@@ -36,13 +36,13 @@ export default function Third({ viewport, position, scrollPosition }) {
         <meshBasicMaterial color="#000fff" />
       </text>
       <Lines ref={lineMaterialRef} pointsPosition={[
-        new THREE.Vector3( -viewport.width, 3 * viewport.height / 2, 0.5),
-        new THREE.Vector3( -1.5, viewport.height / 2, 0.5),
-        new THREE.Vector3( -0.5, - 0.5 * viewport.height / 2 + 0.8, 0.5),
-        new THREE.Vector3( -1.0, - viewport.height / 2 + 0.8, 0.5),
-        new THREE.Vector3( -0.0, - viewport.height / 2, 0)
+        new THREE.Vector3( -viewport.width, 2 * viewport.height / 2, 0.0),
+        new THREE.Vector3( -1.5, viewport.height / 2, 0.0),
+        new THREE.Vector3( -0.5, - 0.5 * viewport.height / 2 + 0.8, 0.0),
+        new THREE.Vector3( -1.0, - viewport.height / 2 + 0.8, 0.0),
+        new THREE.Vector3( 0.2, - viewport.height / 2, 0.0)
       ]}/>
-      <ImageDisplacement args={[1.0, 1.0, 32]} position={[0.5, -0.6, 0.0001]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'} />
+      <ImageDisplacement args={[0.8, 0.8, 32]} position={[0.5, -0.6, 0.6]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/6.jpg'} />
     </mesh>
   )
 }

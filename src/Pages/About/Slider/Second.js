@@ -8,7 +8,7 @@ import '../../../shaders/ImageNoiseMaterial'
 import Lines from '../../../components/Molecules/Lines'
 extend({ Text });
 
-export default function Second({ viewport, position }) {
+export default function Second({ scrollPosition, viewport, position }) {
   const titleRef = useRef()
   const descriptionRef = useRef()
   const backgroundRef = useRef()
@@ -21,7 +21,9 @@ export default function Second({ viewport, position }) {
 
   useFrame((state, delta) => {
     backgroundRef.current.uTime += delta
-    lineMaterialRef.current.uniforms.dashOffset.value -= 0.005
+    lineMaterialRef.current.uniforms.dashOffset.value -= 0.005;
+    descriptionRef.current.position.y = Math.min(0.0, scrollPosition.current - 1.0);
+    titleRef.current.position.y = Math.min(0.5, scrollPosition.current - 0.2);
   })
 
   return (
