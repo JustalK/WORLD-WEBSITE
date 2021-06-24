@@ -3,19 +3,17 @@ import { extend, useFrame, useLoader } from '@react-three/fiber'
 import { Text } from "troika-three-text";
 import * as THREE from 'three'
 import { TweenMax as TM } from 'gsap'
+import ImageDisplacement from '../../../components/Molecules/ImageDisplacement'
 import '../../../shaders/ImageNoiseMaterial'
 import '../../../shaders/ImageDisplacementMaterial'
 import Lines from '../../../components/Molecules/Lines'
 extend({ Text });
 
-export default function Second({ text, color, viewport, position }) {
-  const ref = useRef()
+export default function Second({ viewport, position }) {
   const titleRef = useRef()
   const descriptionRef = useRef()
   const backgroundRef = useRef()
-  const blockLeftRef = useRef()
   const lineMaterialRef = useRef()
-  const [uTexture1, uTexture2, uTextureDisplacement] = useLoader(THREE.TextureLoader, ['./1.jpeg', './2.jpg', './displacement/1.jpg'])
 
   useEffect(() => {
     titleRef.current.sync()
@@ -24,15 +22,12 @@ export default function Second({ text, color, viewport, position }) {
 
   useFrame((state, delta) => {
     backgroundRef.current.uTime += delta
-    blockLeftRef.current.uTime += delta
     lineMaterialRef.current.uniforms.dashOffset.value -= 0.005
   })
 
   return (
     <>
-      <mesh position={position} onPointerMove={(e) => {
-        ref.current.uMouse = e.intersections[0].uv
-      }}>
+      <mesh position={position} >
         <planeGeometry args={[viewport.width, viewport.height, 1]} />
         <imageNoiseMaterial ref={backgroundRef} />
         <text
@@ -59,23 +54,8 @@ export default function Second({ text, color, viewport, position }) {
         >
           <meshBasicMaterial color="#000fff" />
         </text>
-        <mesh position={[-0.2, -0.5, 1.1]} onPointerEnter={() =>
-          TM.to(blockLeftRef.current.uniforms.uTextureDisplacementFactor, 1.6, {
-              value: 1,
-              ease: 'expo.out'
-          })}
-          onPointerOut={() =>
-            TM.to(blockLeftRef.current.uniforms.uTextureDisplacementFactor, 1.6, {
-              value: 0,
-              ease: 'expo.out'
-          })}>
-          <planeGeometry args={[0.5, 0.5, 32]} />
-          <imageDisplacementMaterial ref={blockLeftRef} uTexture1={uTexture1} uTexture2={uTexture2} uTextureDisplacement={uTextureDisplacement} />
-        </mesh>
-        <mesh position={[0.4, -0.7, 0.7]}>
-          <planeGeometry args={[0.5, 0.5, 32]} />
-          <meshBasicMaterial ref={ref} color='#ffffff' />
-        </mesh>
+        <ImageDisplacement position={[-0.2, -0.5, 1.1]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'} />
+        <ImageDisplacement position={[0.4, -0.7, 0.7]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'} />
         <Lines ref={lineMaterialRef} pointsPosition={[
           new THREE.Vector3( viewport.width, 3 * viewport.height / 2, 0),
           new THREE.Vector3( 1.5, viewport.height / 2, 0),

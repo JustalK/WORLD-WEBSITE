@@ -7,7 +7,7 @@ export class ImageDisplacementMaterial extends THREE.ShaderMaterial {
       uniforms: {
         resolution: { value: new THREE.Vector2(window.innerHeight/window.innerWidth,window.innerHeight/window.innerWidth) },
         uTime: { value: 0.0 },
-        uVelo: { value: 1.0 },
+        uVelo: { value: 0.0 },
         uEffectFactor: { value: 1.0 },
         uTextureDisplacementFactor: { value: 0.0 },
         uTexture1: { value: undefined },
@@ -179,10 +179,10 @@ export class ImageDisplacementMaterial extends THREE.ShaderMaterial {
         float b = pnoise( 5.0 * position + vec3( 0.1 * uTime ), vec3( 10.0 ) ) * uVelo;
         float displacement = - noise + b;
         vec3 newPosition = position;
-        newPosition.y -= sin(newPosition.x*10.0+uTime)/100.0;
-        newPosition.x -= sin(newPosition.y*10.0+uTime)/100.0;
-        newPosition.x = position.x + 0.025 * displacement;
-        newPosition.z = position.z + 0.025 * displacement;
+        newPosition.y -= sin(newPosition.x*10.0+uTime)/100.0 * uVelo;
+        newPosition.x -= sin(newPosition.y*10.0+uTime)/100.0 * uVelo;
+        newPosition.x = position.x + 0.025 * displacement * uVelo;
+        newPosition.z = position.z + 0.025 * displacement * uVelo;
         gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
       }`,
       fragmentShader: `
