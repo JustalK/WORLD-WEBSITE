@@ -1,11 +1,10 @@
 import React, { useRef, useEffect } from 'react'
-import { extend, useFrame, useLoader } from '@react-three/fiber'
+import { extend, useFrame } from '@react-three/fiber'
 import { Text } from "troika-three-text";
 import * as THREE from 'three'
 import { TweenMax as TM } from 'gsap'
 import ImageDisplacement from '../../../components/Molecules/ImageDisplacement'
 import '../../../shaders/ImageNoiseMaterial'
-import '../../../shaders/ImageDisplacementMaterial'
 import Lines from '../../../components/Molecules/Lines'
 extend({ Text });
 
@@ -54,8 +53,8 @@ export default function Second({ viewport, position }) {
         >
           <meshBasicMaterial color="#000fff" />
         </text>
-        <ImageDisplacement position={[-0.2, -0.5, 1.1]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'} />
-        <ImageDisplacement position={[0.4, -0.7, 0.7]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'} />
+        <ImageDisplacement args={[0.5, 0.5, 32]} position={[-0.2, -0.5, 1.1]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'} />
+        <ImageDisplacement args={[0.5, 0.5, 32]} position={[0.4, -0.8, 0.7]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'} />
         <Lines ref={lineMaterialRef} pointsPosition={[
           new THREE.Vector3( viewport.width, 3 * viewport.height / 2, 0),
           new THREE.Vector3( 1.5, viewport.height / 2, 0),

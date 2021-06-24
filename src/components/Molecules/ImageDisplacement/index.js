@@ -4,7 +4,7 @@ import * as THREE from "three"
 import { TweenMax as TM } from 'gsap'
 import '../../../shaders/ImageDisplacementMaterial'
 
-export default function ImageDisplacement({ position, pathTexture1, pathTexture2, pathTextureDisplacement }) {
+export default function ImageDisplacement({ args, position, pathTexture1, pathTexture2, pathTextureDisplacement }) {
   const ref = useRef()
   const [uTexture1, uTexture2, uTextureDisplacement] = useLoader(THREE.TextureLoader, [pathTexture1, pathTexture2, pathTextureDisplacement])
 
@@ -21,7 +21,7 @@ export default function ImageDisplacement({ position, pathTexture1, pathTexture2
         TM.to(ref.current.uniforms.uTextureDisplacementFactor, 1.6, { value: 0, ease: 'expo.out'})
         TM.to(ref.current.uniforms.uVelo, 1.0, { value: 0, ease: 'expo.out'})
       }}>
-      <planeGeometry args={[0.5, 0.5, 32]} />
+      <planeGeometry args={args} />
       <imageDisplacementMaterial ref={ref} uTexture1={uTexture1} uTexture2={uTexture2} uTextureDisplacement={uTextureDisplacement} />
     </mesh>
   )
