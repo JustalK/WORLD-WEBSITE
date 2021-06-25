@@ -1,10 +1,10 @@
 import React, { useRef } from 'react'
 import Cursor from '../../components/Molecules/Cursor'
 import { useThree, useFrame } from '@react-three/fiber'
-import Page from './Page'
 import First from './Slider/First'
 import Second from './Slider/Second'
 import Third from './Slider/Third'
+import Fourth from './Slider/Fourth'
 
 export default function Scene({ cursorPosition, scrollPosition, history }) {
   const viewport = useThree((state) => state.viewport)
@@ -21,7 +21,7 @@ export default function Scene({ cursorPosition, scrollPosition, history }) {
       <First ref={firstRef} viewport={viewport} scrollPosition={scrollPosition} backgroundRef={backgroundRef} />
       <Second viewport={viewport} position={[0, -viewport.height, 0]} scrollPosition={scrollPosition} />
       <Third viewport={viewport} position={[0, -2 * viewport.height, 0]} scrollPosition={scrollPosition} />
-      <Page text={<h1>4</h1>} color="blue" position={[0, -3 * viewport.height, 0]} />
+      <Fourth viewport={viewport} position={[0, -3 * viewport.height, 0]} scrollPosition={scrollPosition} />
       <Cursor cursorPosition={cursorPosition} scrollPosition={scrollPosition} realCursor={cursorPosition}/>
     </>
   )

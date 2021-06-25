@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react'
 import { extend, useFrame } from '@react-three/fiber'
 import { Text } from "troika-three-text";
 import * as THREE from 'three'
-import { TweenMax as TM } from 'gsap'
 import ImageDisplacement from '../../../components/Molecules/ImageDisplacement'
 import '../../../shaders/ImageNoiseMaterial'
 import Lines from '../../../components/Molecules/Lines'
