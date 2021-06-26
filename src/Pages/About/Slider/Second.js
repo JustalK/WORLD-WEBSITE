@@ -5,6 +5,7 @@ import * as THREE from 'three'
 import ImageDisplacement from '../../../components/Molecules/ImageDisplacement'
 import '../../../shaders/ImageNoiseMaterial'
 import Lines from '../../../components/Molecules/Lines'
+import TitleColor from '../../../components/Molecules/TitleColor'
 extend({ Text });
 
 export default function Second({ scrollPosition, viewport, position }) {
@@ -30,18 +31,7 @@ export default function Second({ scrollPosition, viewport, position }) {
       <mesh position={position} >
         <planeGeometry args={[viewport.width, viewport.height, 1]} />
         <imageNoiseMaterial ref={backgroundRef} />
-        <text
-          position={[0, 0.5, 0.1]}
-          fontSize={0.2}
-          color= "#ffffff"
-          maxWidth={100}
-          text={"ABOUT ME"}
-          anchorX="center"
-          anchorY="middle"
-          ref={titleRef}
-        >
-          <meshBasicMaterial color="#000fff" />
-        </text>
+        <TitleColor ref={titleRef} position={[0, 0.5, 0.1]} text="ABOUT ME" />
         <text
           position={[0, 0.0, 0.1]}
           fontSize={0.05}
