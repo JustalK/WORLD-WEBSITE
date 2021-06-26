@@ -23,7 +23,7 @@ export default function Sixth({ viewport, position, scrollPosition }) {
     <mesh position={position}>
       <planeGeometry args={[viewport.width, viewport.height, 1]} />
       <imageNoiseMaterial ref={backgroundRef} />
-      <TitleColor ref={titleRef} position={[0.0, 0.0, 0.1]} text="TO BE CONTINUE" />
+      <TitleColor ref={titleRef} position={[0.0, 0.0, 0.1]} text="LIFE CONTINUE..." />
     </mesh>
   )
 }

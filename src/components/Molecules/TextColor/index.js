@@ -10,6 +10,12 @@ const TextColor = forwardRef(({position, text},textMeshRef) => {
 
   useEffect(() => {
     textMeshRef.current.sync()
+
+    const resolution = {
+      x: textMeshRef.current.geometry.boundingBox.max.x * 2,
+      y: textMeshRef.current.geometry.boundingBox.max.y * 2
+    }
+    textMaterialRef.current.resolution = resolution
   })
 
   useFrame((state, delta) => {

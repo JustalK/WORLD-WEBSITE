@@ -8,6 +8,7 @@ import * as THREE from 'three'
 export default function Third({ viewport, position, scrollPosition }) {
   const descriptionRef = useRef()
   const lineMaterialRef = useRef()
+  const lightRef = useRef()
   useEffect(() => {
     descriptionRef.current.sync()
   })
@@ -15,13 +16,15 @@ export default function Third({ viewport, position, scrollPosition }) {
   useFrame((state, delta) => {
     descriptionRef.current.position.x = 1.8 - scrollPosition.current;
     descriptionRef.current.fillOpacity = Math.min(1.0, 2 * (scrollPosition.current - 1.3))
+    lightRef.current.intensity = Math.min(0.3, 0.5 * (scrollPosition.current - 1.4))
     lineMaterialRef.current.uniforms.dashOffset.value -= 0.007;
   })
 
   return (
     <mesh position={position} >
       <planeGeometry args={[viewport.width, viewport.height, 1]} />
-      <meshBasicMaterial color="#000000" />
+      <meshPhongMaterial color="#000000" />
+      <directionalLight color="#E1698B" ref={lightRef} intensity={0.0} position={[-1.0, 0.6, 2]} />
       <TextColor ref={descriptionRef} position={[0, 0.3, 0.1]} text="I also love sport. I was a profesionnal roller speed skater for few years, I did several races in Europe and ended up winning a certain amount of races including some internationnal ones. Sport made me love competition. That's maybe why I like to challenge myself so much both in my professional and personnal life." />
       <Lines ref={lineMaterialRef} pointsPosition={[
         new THREE.Vector3( -viewport.width, 2 * viewport.height / 2, 0.0),

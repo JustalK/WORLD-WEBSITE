@@ -5,7 +5,7 @@ export class TextColorNoMoveShaderMaterial extends THREE.ShaderMaterial {
   constructor() {
     super({
       uniforms: {
-        resolution: { value: new THREE.Vector2(7.3,1.0) },
+        resolution: { value: new THREE.Vector2(0.0, 0.0) },
         uMouse: { value: new THREE.Vector2(0.5, 0.5) },
         uVelo: { value: 1.0 },
         uTime: { value: 0 }
@@ -34,15 +34,21 @@ export class TextColorNoMoveShaderMaterial extends THREE.ShaderMaterial {
       }
       void main()  {
           vec2 newUV = vUv;
-          float c = circle(vUv, uMouse, 0.8 * (uVelo), 0.05);
+          float c = circle(vUv, uMouse, 0.75 * (uVelo), 0.05);
 
           float finalMask = smoothstep(0.4, 0.5, c);
 
-        	vec4 finalImage = mix(vec4(1.0, 1.0, 1.0, 1.0), vec4(0.0, 0.0, 0.0, 1.0), finalMask);
+        	vec4 finalImage = mix(vec4(1.0, 1.0, 1.0, 1.0), vec4(sin(uTime), sin(1.2 * 3.14 + uTime), sin(0.8 * 3.14 + uTime), 1.0), finalMask);
 
           gl_FragColor = finalImage;
       }`
     })
+  }
+  get resolution() {
+    return this.uniforms.resolution.value
+  }
+  set resolution(v) {
+    return (this.uniforms.resolution.value = v)
   }
   get uVelo() {
     return this.uniforms.uVelo.value
