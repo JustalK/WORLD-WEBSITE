@@ -1,12 +1,11 @@
 import React, { useRef, useEffect } from 'react'
-import { extend, useFrame } from '@react-three/fiber'
-import { Text } from "troika-three-text";
+import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import ImageDisplacement from '../../../components/Molecules/ImageDisplacement'
-import '../../../shaders/ImageNoiseMaterial'
 import Lines from '../../../components/Molecules/Lines'
 import TitleColor from '../../../components/Molecules/TitleColor'
-extend({ Text });
+import TextColor from '../../../components/Molecules/TextColor'
+import '../../../shaders/ImageNoiseMaterial'
 
 export default function Second({ scrollPosition, viewport, position }) {
   const titleRef = useRef()
@@ -22,6 +21,7 @@ export default function Second({ scrollPosition, viewport, position }) {
   useFrame((state, delta) => {
     backgroundRef.current.uTime += delta
     lineMaterialRef.current.uniforms.dashOffset.value -= 0.005;
+    descriptionRef.current.fillOpacity = Math.min(1.0, 2 * (scrollPosition.current - 0.5))
     descriptionRef.current.position.y = Math.min(0.0, scrollPosition.current - 1.0);
     titleRef.current.position.y = Math.min(0.5, scrollPosition.current - 0.2);
   })
@@ -32,18 +32,7 @@ export default function Second({ scrollPosition, viewport, position }) {
         <planeGeometry args={[viewport.width, viewport.height, 1]} />
         <imageNoiseMaterial ref={backgroundRef} />
         <TitleColor ref={titleRef} position={[0, 0.5, 0.1]} text="ABOUT ME" />
-        <text
-          position={[0, 0.0, 0.1]}
-          fontSize={0.05}
-          color= "#ffffff"
-          maxWidth={1.8}
-          text={"Hello, I'm Kevin, 30, a developer from Rennes, a city from Britany in France. As a child, My parents made me discover the Europe. As a natural consequence, I turn to love travelling, I move from France in my twenties and I started to work at the opposite of the world for multiple years."}
-          anchorX="center"
-          anchorY="middle"
-          ref={descriptionRef}
-        >
-          <meshBasicMaterial color="#000fff" />
-        </text>
+        <TextColor ref={descriptionRef} position={[0, 0, 0.1]} text="Hello, I'm Kevin, 30, a developer from Rennes, a city from Britany in France. As a child, My parents made me discover the Europe. As a natural consequence, I turn to love travelling, I move from France in my twenties and I started to work at the opposite of the world for multiple years." />
         <ImageDisplacement args={[0.5, 0.5, 32]} position={[-0.2, -0.5, 1.1]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'} />
         <ImageDisplacement args={[0.5, 0.5, 32]} position={[0.4, -0.8, 0.7]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'} />
         <Lines ref={lineMaterialRef} pointsPosition={[

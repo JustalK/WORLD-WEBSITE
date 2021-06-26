@@ -4,7 +4,7 @@ import { Text } from "troika-three-text"
 import '../../../shaders/TextColorShaderMaterial'
 extend({Text})
 
-const Lines = forwardRef(({position, text},titleRef) => {
+const TitleColor = forwardRef(({position, text},titleRef) => {
   const titleMaterialRef = useRef()
   const [hoverText, setHoverText] = useState(false)
 
@@ -36,4 +36,4 @@ const Lines = forwardRef(({position, text},titleRef) => {
   )
 })
 
-export default Lines;
+export default TitleColor;
