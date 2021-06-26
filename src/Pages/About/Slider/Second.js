@@ -47,7 +47,7 @@ export default function Second({ scrollPosition, viewport, position }) {
           fontSize={0.05}
           color= "#ffffff"
           maxWidth={1.8}
-          text={"I'm a french developer with more than 5 years of internationnal experiences. Through the year, I have worked with many frameworks such as React, Vue.js, Three.js, Node.js. On my spare time, I improve my skill by developing new websites or app, freelancing or experimenting on github."}
+          text={"Hello, I'm Kevin, 30, a developer from Rennes, a city from Britany in France. As a child, My parents made me discover the Europe. As a natural consequence, I turn to love travelling, I move from France in my twenties and I started to work at the opposite of the world for multiple years."}
           anchorX="center"
           anchorY="middle"
           ref={descriptionRef}

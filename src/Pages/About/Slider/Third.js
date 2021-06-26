@@ -28,7 +28,7 @@ export default function Third({ viewport, position, scrollPosition }) {
         fontSize={0.05}
         color= "#ffffff"
         maxWidth={1.8}
-        text={"I'm a french developer with more than 5 years of internationnal experiences. Through the year, I have worked with many frameworks such as React, Vue.js, Three.js, Node.js. On my spare time, I improve my skill by developing new websites or app, freelancing or experimenting on github."}
+        text={"I also love sport. I was a profesionnal roller speed skater for few years, I did several races in Europe and ended up winning a certain amount of races including some internationnal ones. Sport made me love competition. That's maybe why I like to challenge myself so much both in my professional and personnal life."}
         anchorX="center"
         anchorY="middle"
         ref={descriptionRef}
@@ -42,7 +42,7 @@ export default function Third({ viewport, position, scrollPosition }) {
         new THREE.Vector3( -0.8, - viewport.height / 2 + 0.8, 0.0),
         new THREE.Vector3( 0.2, - 0.65 * viewport.height / 2, 0.0)
       ]}/>
-      <ImageDisplacement args={[0.8, 0.8, 32]} position={[0.5, -0.6, 0.6]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/6.jpg'}  />
+      <ImageDisplacement args={[0.8, 0.8, 32]} position={[0.5, -0.6, 0.6]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'}  />
     </mesh>
   )
 }

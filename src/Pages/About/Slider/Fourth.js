@@ -30,7 +30,7 @@ export default function Fourth({ viewport, position, scrollPosition }) {
         fontSize={0.05}
         color= "#ffffff"
         maxWidth={1.8}
-        text={"I'm a french developer with more than 5 years of internationnal experiences. Through the year, I have worked with many frameworks such as React, Vue.js, Three.js, Node.js. On my spare time, I improve my skill by developing new websites or app, freelancing or experimenting on github."}
+        text={"My work as a developer is more a passion I fall into when I was 10 year old. I master many libraries and frameworks such as React, Vue, WordPress, Node. I work for multiple companies and try to push myself everyday by experimenting on my personal projects which can be found on my github."}
         anchorX="center"
         anchorY="middle"
         ref={descriptionRef}
