@@ -3,7 +3,7 @@ import { TweenMax as TM } from 'gsap'
 import Text from '../../Atoms/Text'
 import Link from '../../Atoms/Link'
 
-const FloatingLink = forwardRef(({children, className, history, to}, ref) => {
+const FloatingLink = forwardRef(({children, className, history, to, offset = 0}, ref) => {
   const centerButton = useRef({x: 0, y:0})
   const outside = useRef('translate3d(0px, 0px, 0)')
   const outsideTransform = useRef({x: 0, y:0})
@@ -30,7 +30,7 @@ const FloatingLink = forwardRef(({children, className, history, to}, ref) => {
   return (
     <Link className="visit" onPointerMove={(e) => {
       const a = e.clientX - centerButton.current.x
-      const b = e.clientY - centerButton.current.y
+      const b = e.clientY + window.innerHeight * offset  - centerButton.current.y
       TM.to(outsideTransform.current, 0.2, {
         x: a * 0.35,
         y: b * 0.35
@@ -44,7 +44,7 @@ const FloatingLink = forwardRef(({children, className, history, to}, ref) => {
       history.push(to)
     }}>
       <Text ref={outside}>
-        <Text>VIEW</Text>
+        <Text>{children}</Text>
       </Text>
     </Link>
   )
