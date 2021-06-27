@@ -9,7 +9,7 @@ import Arrow from '../../components/Molecules/Arrow'
 import { useThree, useFrame, extend } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import Splitting from 'splitting'
-import {ROUTE_ABOUT} from '../../Constants/Routes'
+import {ROUTE_ABOUT, ROUTE_CONTACT} from '../../Constants/Routes'
 import * as THREE from 'three'
 import { Text } from "troika-three-text";
 import '../../shaders/TextShaderMaterial'
@@ -79,7 +79,7 @@ export default function Scene({ cursorPosition, history }) {
         <span className="summary" data-splitting="">This website has been made for keeping the different aspect of my life in one single place. From here, you can discover either my work life or few of my creation more personnal.</span>
       </Html>
       <Html position={[0.42 * viewport.width, -0.42 * viewport.height / 2, 0]} style={{width: '60px', height: '60px'}} center >
-        <MagneticLink className="nextPage" cursorLink={cursorLinkRef} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_ABOUT}>
+        <MagneticLink className="nextPage" cursorLink={cursorLinkRef} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_CONTACT}>
           <Arrow />
         </MagneticLink>
       </Html>

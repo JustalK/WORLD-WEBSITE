@@ -1,13 +1,12 @@
 import React, { Suspense, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
-import Scene from './Scene'
 import { TweenMax as TM } from 'gsap'
 import InitialTransition from '../../Transitions/InitialTransition'
 import BlackTransition from '../../Transitions/BlackTransition'
+import Scene from './Scene'
 
-export default function Home({ history, firstTransition }) {
+export default function Contact({ history, firstTransition }) {
   const cursorPosition = useRef({x: 0.5, y:0.5})
-
   return (
     <>
       {firstTransition && (<InitialTransition />)}
