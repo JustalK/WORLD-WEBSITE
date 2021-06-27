@@ -33,7 +33,7 @@ export default function Third({ viewport, position, scrollPosition }) {
         new THREE.Vector3( -0.8, - viewport.height / 2 + 0.8, 0.0),
         new THREE.Vector3( 0.2, - 0.65 * viewport.height / 2, 0.0)
       ]}/>
-      <ImageDisplacement args={[0.8, 0.8, 32]} position={[0.5, -0.6, 0.6]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'}  />
+      <ImageDisplacement args={[0.8, 0.8, 32]} position={[0.5, -0.6, 0.6]} pathTexture1={'./images/roller_2.jpg'} pathTexture2={'./images/roller_1.jpg'} pathTextureDisplacement={'./displacement/4.png'}  />
     </mesh>
   )
 }
