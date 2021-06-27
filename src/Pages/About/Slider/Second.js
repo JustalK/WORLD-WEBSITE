@@ -31,7 +31,7 @@ export default function Second({ scrollPosition, viewport, position }) {
       <mesh position={position} >
         <planeGeometry args={[viewport.width, viewport.height, 1]} />
         <imageNoiseMaterial ref={backgroundRef} />
-        <TitleColor ref={titleRef} position={[0, 0.5, 0.1]} text="ABOUT ME" />
+        <TitleColor ref={titleRef} position={[0, 0.5, 0.1]} text="MY LIFE" />
         <TextColor ref={descriptionRef} position={[0, 0, 0.1]} text="Hello, I'm Kevin, 30, a developer from Rennes, a city from Britany in France. As a child, My parents made me discover the Europe. As a natural consequence, I turn to love travelling, I move from France in my twenties and I started to work at the opposite of the world for multiple years." />
         <ImageDisplacement args={[0.5, 0.5, 32]} position={[-0.2, -0.5, 1.1]} pathTexture1={'./images/work_4.jpg'} pathTexture2={'./images/work_2.jpg'} pathTextureDisplacement={'./displacement/4.png'} />
         <ImageDisplacement args={[0.5, 0.5, 32]} position={[0.4, -0.8, 0.7]} pathTexture1={'./images/work_5.jpg'} pathTexture2={'./images/work_3.jpg'} pathTextureDisplacement={'./displacement/4.png'} />

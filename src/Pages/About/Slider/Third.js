@@ -16,7 +16,7 @@ export default function Third({ viewport, position, scrollPosition }) {
   useFrame((state, delta) => {
     descriptionRef.current.position.x = 1.8 - scrollPosition.current;
     descriptionRef.current.fillOpacity = Math.min(1.0, 2 * (scrollPosition.current - 1.3))
-    lightRef.current.intensity = Math.min(0.3, 0.5 * (scrollPosition.current - 1.4))
+    lightRef.current.intensity = Math.min(0.3, Math.max(0.0, 0.5 * (scrollPosition.current - 1.4)))
     lineMaterialRef.current.uniforms.dashOffset.value -= 0.007;
   })
 

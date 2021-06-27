@@ -167,7 +167,7 @@ nav span {
   min-height: 100vh;
   height: 100%;
   background: black;
-  z-index: 2000;
+  z-index: 1000;
   overflow: hidden;
 }
 

@@ -209,7 +209,7 @@ export class ImageDisplacementMaterial extends THREE.ShaderMaterial {
 
           vec4 finalTexture = mix(_texture, _uTexture2, uTextureDisplacementFactor);
 
-          gl_FragColor = vec4(finalTexture.x + finalTexture.x * uVelo * 0.4, finalTexture.y + finalTexture.y * uVelo * 0.4, finalTexture.z + finalTexture.z * uVelo * 0.4, 1.0);
+          gl_FragColor = vec4(finalTexture.x + finalTexture.x * uVelo * 0.1, finalTexture.y + finalTexture.y * uVelo * 0.1, finalTexture.z + finalTexture.z * uVelo * 0.1, 1.0);
         }
       `
     })

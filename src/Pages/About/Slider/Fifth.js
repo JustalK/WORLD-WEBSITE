@@ -17,7 +17,7 @@ export default function Fifth({ viewport, position, scrollPosition }) {
 
   useFrame((state, delta) => {
     lineMaterialRef.current.uniforms.dashOffset.value -= 0.009;
-    lightRef.current.intensity = Math.min(0.3, 0.5 * (scrollPosition.current - 3.4))
+    lightRef.current.intensity = Math.min(0.3, Math.max(0.0, 0.5 * (scrollPosition.current - 3.4)))
     descriptionRef.current.fillOpacity = Math.min(1.0, 2 * (scrollPosition.current - 3.3))
   })
 

@@ -5,11 +5,12 @@ import { TweenMax as TM } from 'gsap'
 import InitialTransition from '../../Transitions/InitialTransition'
 import BlackTransition from '../../Transitions/BlackTransition'
 
-export default function Home({ history }) {
+export default function Home({ history, firstTransition }) {
   const cursorPosition = useRef({x: 0.5, y:0.5})
+  console.log(firstTransition)
   return (
     <>
-      <InitialTransition />
+      {firstTransition && (<InitialTransition />)}
       <BlackTransition />
       <div id="canvas-container" onPointerMove={(e) => {
         TM.to(cursorPosition.current, 0.0, {
