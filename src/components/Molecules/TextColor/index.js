@@ -27,6 +27,7 @@ const TextColor = forwardRef(({position, text},textMeshRef) => {
     <text
       position={position}
       fontSize={0.05}
+      font={'/ArchivoNarrow-Regular.ttf'}
       color= "#ffffff"
       maxWidth={1.8}
       text={text}

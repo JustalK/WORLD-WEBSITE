@@ -59,7 +59,7 @@ export default function Scene({ cursorPosition, history }) {
         text={"ANY VARIATION\nIS ANOTHER WORLD"}
         anchorX="center"
         textAlign="center"
-        font={'/PlayfairDisplay.ttf'}
+        font={'/Barlow-Regular.ttf'}
         anchorY="middle"
         ref={textRef}
         onPointerEnter={(e) => setHoverText(true)} onPointerLeave={(e) => setHoverText(false)}

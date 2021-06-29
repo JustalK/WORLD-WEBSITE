@@ -20,6 +20,7 @@ const TitleColor = forwardRef(({position, text},titleRef) => {
     <text
       position={position}
       fontSize={0.2}
+      font={'/Barlow-Regular.ttf'}
       color= "#ffffff"
       maxWidth={100}
       text={text}

@@ -42,7 +42,7 @@ const First = forwardRef(({ scrollPosition, viewport, backgroundRef }, ref) => {
         maxWidth={100}
         text={"JUSTAL KEVIN"}
         anchorX="center"
-        font={'/PlayfairDisplay.ttf'}
+        font={'/Barlow-Regular.ttf'}
         anchorY="middle"
         ref={textRef}
         onPointerEnter={(e) => setHoverText(true)} onPointerLeave={(e) => setHoverText(false)}
