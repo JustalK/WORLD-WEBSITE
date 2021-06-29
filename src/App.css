@@ -201,3 +201,20 @@ text {
   height: 100%;
   fill: blue;
 }
+
+.customInput {
+  //transform: rotateZ(-30deg);
+  height: 7vh;
+  width: 18vw;
+  background: red;
+  border: none;
+  outline: none;
+}
+
+.customTextarea {
+  height: 450px;
+  width: 400px;
+  background: red;
+  border: none;
+  outline: none;
+}
