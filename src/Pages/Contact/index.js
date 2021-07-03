@@ -10,7 +10,7 @@ export default function About({ history }) {
   const scrollRef = useRef()
   const canvasRef = useRef()
   const scroll = useRef(0)
-  const page = 5
+  const page = 3
   const doScroll = (e) => {
     scroll.current = page * e.target.scrollTop / (e.target.scrollHeight - window.innerHeight);
     return scroll.current

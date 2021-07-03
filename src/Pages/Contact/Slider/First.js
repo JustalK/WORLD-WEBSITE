@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useFrame, extend } from '@react-three/fiber'
-import Cursor from '../../../components/Molecules/Cursor'
 import { Text } from "troika-three-text";
 import '../../../shaders/ImageNoiseMaterial'
 import '../../../shaders/TextShaderMaterial'
