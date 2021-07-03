@@ -8,7 +8,6 @@ import ScrollContainer from './ScrollContainer'
 export default function About({ history }) {
   const cursorPosition = useRef({x: 0.5, y: 0.5})
   const scrollRef = useRef()
-  const canvasRef = useRef()
   const scroll = useRef(0)
   const page = 3
   const doScroll = (e) => {
@@ -24,7 +23,7 @@ export default function About({ history }) {
           y: e.clientY/window.innerHeight
         })
       }}>
-        <Canvas ref={canvasRef} camera={{ position: [0, 0, 2], fov: 50 }}
+        <Canvas camera={{ position: [0, 0, 2], fov: 50 }}
           onCreated={(state) => state.events.connect(scrollRef.current)}
           raycaster={{ computeOffsets: ({ clientX, clientY }) => ({ offsetX: clientX, offsetY: clientY }) }}>
           <Suspense fallback={null}>
