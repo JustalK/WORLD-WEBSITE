@@ -62,12 +62,12 @@ export class BackgroundFireUpMaterial extends THREE.ShaderMaterial {
                 .03+0.*length(vec2(px-.5, py/2.-.5))*.15+
                 0.1/(pow(py, 1.1)+0.1)
             )))-0.5;
-            if (0.2 <= fi) {
+            if (0.1 <= fi) {
                 r = 0.;
                 g = 0.;
                 b = 0.;
             }
-            else if (0.2 <= fi && fi <= 1.0) {
+            else if (0.1 <= fi && fi <= 1.0) {
                 r = 0.0;
                 b = 0.0;
                 g = 0.0;

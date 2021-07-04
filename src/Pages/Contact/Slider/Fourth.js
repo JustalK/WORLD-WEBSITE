@@ -15,7 +15,7 @@ export default function Scene({ scrollPosition, viewport, position }) {
   })
 
   useFrame((state, delta) => {
-    titleRef.current.position.y = Math.min(1.2, scrollPosition.current - 0.2);
+    titleRef.current.position.y = Math.min(0.9, scrollPosition.current - 0.2);
   })
 
   return (
@@ -23,8 +23,8 @@ export default function Scene({ scrollPosition, viewport, position }) {
       <mesh position={position} >
         <planeGeometry args={[viewport.width, viewport.height, 1]} />
         <backgroundCustomColorShaderMaterial uColorRed={0.356} uColorGreen={0.035} uColorBlue={0.978}/>
-        <TitleColor ref={titleRef} position={[0, 0.0, 0.1]} text="GET IN TOUCH" />
-        <Html distanceFactor={0.8} transform position={[0, 0.4, 0]} style={{width: '600px'}} center >
+        <TitleColor ref={titleRef} position={[0, -0.4, 0.1]} text="GET IN TOUCH" />
+        <Html distanceFactor={0.8} transform position={[0, 0.1, 0]} style={{width: '600px'}} center >
           <div>
             <input className="customInput" placeholder="Write your email : me@example.com" />
           </div>
