@@ -9,7 +9,7 @@ export default function About({ history }) {
   const cursorPosition = useRef({x: 0.5, y: 0.5})
   const scrollRef = useRef()
   const scroll = useRef(0)
-  const page = 3
+  const page = 4
   const doScroll = (e) => {
     scroll.current = page * e.target.scrollTop / (e.target.scrollHeight - window.innerHeight);
     return scroll.current

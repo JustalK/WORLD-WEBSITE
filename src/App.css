@@ -203,18 +203,27 @@ text {
 }
 
 .customInput {
-  //transform: rotateZ(-30deg);
-  height: 7vh;
-  width: 18vw;
-  background: red;
+  font-family: 'Barlow', sans-serif;
+  font-size: 25px;
+  height: 40px;
+  width: calc(100% - 40px);
+  background: #ffffff;
   border: none;
   outline: none;
+  margin-bottom: 50px;
+  border-radius: 20px;
+  padding: 20px 20px;
 }
 
 .customTextarea {
-  height: 450px;
-  width: 400px;
-  background: red;
+  font-family: 'Barlow', sans-serif;
+  font-size: 25px;
+  height: 350px;
+  width: calc(100% - 40px);
+  background: white;
   border: none;
   outline: none;
+  border-radius: 20px;
+  padding: 20px 20px;
+  resize: none;
 }
