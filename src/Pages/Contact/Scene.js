@@ -17,7 +17,6 @@ export default function Scene({ cursorPosition, scrollPosition, history }) {
   useFrame((state, delta) => {
     loatingViewRef.current.getOutside().style.transform = `translate3d(${loatingViewRef.current.getOutsideTransform().x}px, ${loatingViewRef.current.getOutsideTransform().y}px, 0)`;
   })
-
   return (
     <>
       <First viewport={viewport} scrollPosition={scrollPosition} />

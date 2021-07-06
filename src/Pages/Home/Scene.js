@@ -40,7 +40,6 @@ export default function Scene({ cursorPosition, history }) {
     lineMaterialRef.current.uniforms.dashOffset.value -= 0.01
     loatingViewRef.current.getOutside().style.transform = `translate3d(${loatingViewRef.current.getOutsideTransform().x}px, ${loatingViewRef.current.getOutsideTransform().y}px, 0)`;
   })
-
   return (
     <>
       <Lines ref={lineMaterialRef} pointsPosition={[
@@ -84,7 +83,7 @@ export default function Scene({ cursorPosition, history }) {
         </MagneticLink>
       </Html>
       <Html position={[0, -0.75 * viewport.height / 2, 0.1]} center >
-        <FloatingLink ref={loatingViewRef} history={history} to={ROUTE_ABOUT}>VIEW</FloatingLink>
+        <FloatingLink ref={loatingViewRef} history={history} to={ROUTE_ABOUT}  offset={0}>VIEW</FloatingLink>
       </Html>
       <Cursor cursorPosition={hover ? cursorLinkRef : cursorPosition} realCursor={cursorPosition} scrollPosition={scrollPosition} hover={hover} />
       <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />

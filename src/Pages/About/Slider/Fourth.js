@@ -18,7 +18,6 @@ export default function Fourth({ viewport, position, scrollPosition }) {
   useFrame((state) => {
     descriptionRef.current.position.x = scrollPosition.current - 2.8;
     descriptionRef.current.fillOpacity = Math.min(1.0, 2 * (scrollPosition.current - 2.3))
-    console.log(0.5 * (scrollPosition.current - 2.4))
     lightRef.current.intensity = Math.min(0.3, Math.max(0.0, 0.5 * (scrollPosition.current - 2.4)))
     lineMaterialRef.current.uniforms.dashOffset.value -= 0.009;
   })
