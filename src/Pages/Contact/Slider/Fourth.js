@@ -1,21 +1,28 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { extend, useFrame } from '@react-three/fiber'
 import TitleColor from '../../../components/Molecules/TitleColor'
 import { Text } from "troika-three-text";
 import '../../../shaders/BackgroundCustomColorShaderMaterial'
+import '../../../shaders/ButtonShaderMaterial'
 import { Html } from '@react-three/drei'
 
 extend({ Text });
 
 export default function Scene({ scrollPosition, viewport, position }) {
   const titleRef = useRef()
+  const buttonTextRef = useRef()
   const formRef = useRef()
+  const buttonMaterialRef = useRef()
+  const [hover, setHover] = useState(false)
 
   useEffect(() => {
     titleRef.current.sync()
+    buttonTextRef.current.sync()
   })
 
   useFrame((state, delta) => {
+    buttonMaterialRef.current.uTime += delta
+    buttonMaterialRef.current.uHover = hover ? Math.min(1.0, buttonMaterialRef.current.uHover + 0.05) : Math.max(0.0, buttonMaterialRef.current.uHover - 0.05)
     titleRef.current.position.y = Math.min(0.9, 1.1 * scrollPosition.current - 1.2);
     formRef.current.style.opacity = Math.min(1.0, 2 * (scrollPosition.current - 1.75))
   })
@@ -34,6 +41,24 @@ export default function Scene({ scrollPosition, viewport, position }) {
             <textarea className="customTextarea" placeholder="Write your question or concern..." />
           </div>
         </Html>
+        <mesh position={[0, -0.65, 0]}
+        onPointerEnter={(e) => setHover(true)} onPointerLeave={(e) => setHover(false)}>
+          <circleGeometry args={[0.15, 128]} />
+          <buttonShaderMaterial ref={buttonMaterialRef} />
+          <text
+            position={[0, 0, 0]}
+            fontSize={0.05}
+            font={'/ArchivoNarrow-Regular.ttf'}
+            color= "#5b09f9"
+            maxWidth={1.8}
+            text="SEND"
+            anchorX="center"
+            anchorY="middle"
+            ref={buttonTextRef}
+          >
+            <meshBasicMaterial />
+          </text>
+        </mesh>
       </mesh>
     </>
   )
