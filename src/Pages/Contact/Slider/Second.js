@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { extend } from '@react-three/fiber'
 import { Text } from "troika-three-text";
+import * as THREE from 'three'
+import Lines from '../../../components/Molecules/Lines'
 import TitleColor from '../../../components/Molecules/TitleColor'
 import TextColor from '../../../components/Molecules/TextColor'
 import '../../../shaders/BackgroundCustomColorShaderMaterial'
@@ -14,6 +16,7 @@ export default function Scene({ scrollPosition, viewport, position }) {
   const emailRef = useRef()
   const numberRef = useRef()
   const githubRef = useRef()
+  const lineMaterialRef = useRef()
 
   useEffect(() => {
     titleRef.current.sync()
@@ -24,6 +27,7 @@ export default function Scene({ scrollPosition, viewport, position }) {
   })
 
   useFrame((state, delta) => {
+    lineMaterialRef.current.uTime += delta
     descriptionRef.current.fillOpacity = Math.min(1.0, 1.5 * (scrollPosition.current - 0.6))
     emailRef.current.fillOpacity = Math.min(1.0, 2 * (scrollPosition.current - 0.7))
     numberRef.current.fillOpacity = Math.min(1.0, 2 * (scrollPosition.current - 0.7))
@@ -43,6 +47,13 @@ export default function Scene({ scrollPosition, viewport, position }) {
       <TextColor ref={emailRef} position={[0, -0.25, 0.0]} text="justal.kevin@gmail.com" />
       <TextColor ref={numberRef} position={[0, -0.5, 0.0]} text="+9996569480" />
       <TextColor ref={githubRef} position={[0, -0.75, 0.0]} text="Github: @justalk" />
+      <Lines ref={lineMaterialRef} pointsPosition={[
+        new THREE.Vector3( -viewport.width, - 1.5 * viewport.height, 1),
+        new THREE.Vector3( -2.0, - 1.5 * viewport.height, 1),
+        new THREE.Vector3( -1.5, -0.2, 1),
+        new THREE.Vector3( 1.0, viewport.height/2, 1),
+        new THREE.Vector3( 1.0, 2 * viewport.height, 1),
+      ]}/>
     </mesh>
   )
 }

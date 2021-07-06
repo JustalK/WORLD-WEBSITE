@@ -5,7 +5,7 @@ import { MeshLine, MeshLineMaterial } from 'meshline'
 
 extend({ MeshLine, MeshLineMaterial })
 
-const Lines = forwardRef(({children, className, pointsPosition},ref) => {
+const Lines = forwardRef(({children, className, pointsPosition, color = "#9c88ff"},ref) => {
   const nbrPoints = 250
   const linePoints = new THREE.CatmullRomCurve3(pointsPosition).getPoints(nbrPoints);
 
@@ -18,7 +18,7 @@ const Lines = forwardRef(({children, className, pointsPosition},ref) => {
         transparent
         depthTest={true}
         lineWidth={0.005}
-        color={'#9c88ff'}
+        color={color}
         dashArray={3.0}
         dashRatio={0.05}
       />
