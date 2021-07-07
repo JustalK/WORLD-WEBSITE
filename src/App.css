@@ -213,9 +213,12 @@ text {
   margin-bottom: 50px;
   border-radius: 20px;
   padding: 20px 20px;
+  border: 2px solid #ffffff;
+  transition: background 0.25s;
 }
 
 .customTextarea {
+  transition: background 0.25s;
   font-family: 'Barlow', sans-serif;
   font-size: 25px;
   height: 350px;
@@ -226,4 +229,11 @@ text {
   border-radius: 20px;
   padding: 20px 20px;
   resize: none;
+  border: 2px solid #ffffff;
+}
+
+.customInput:disabled,
+.customTextarea:disabled {
+  background: #ffffff52;
+  pointer-events: none;
 }

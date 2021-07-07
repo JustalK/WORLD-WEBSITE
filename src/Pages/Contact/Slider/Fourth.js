@@ -41,10 +41,10 @@ export default function Scene({ scrollPosition, viewport, position }) {
         <TitleColor ref={titleRef} position={[0, -0.4, 0.1]} text="GET IN TOUCH" />
         <Html ref={formRef} distanceFactor={0.8} transform position={[0, 0.1, 0]} style={{width: '600px'}} center >
           <div>
-            <input className="customInput" placeholder="Write your email : me@example.com" />
+            <input className="customInput" disabled={sent} placeholder="Write your email : me@example.com" />
           </div>
           <div>
-            <textarea className="customTextarea" placeholder="Write your question or concern..." />
+            <textarea className="customTextarea" disabled={sent} placeholder="Write your question or concern..." />
           </div>
         </Html>
         <mesh ref={buttonRef} position={[0, -0.65, 0.00001]}
