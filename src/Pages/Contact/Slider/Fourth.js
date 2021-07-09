@@ -7,6 +7,7 @@ import Lines from '../../../components/Molecules/Lines'
 import '../../../shaders/BackgroundCustomColorShaderMaterial'
 import '../../../shaders/ButtonShaderMaterial'
 import { Html } from '@react-three/drei'
+import emailjs from 'emailjs-com';
 
 extend({ Text });
 
@@ -17,8 +18,7 @@ export default function Scene({ scrollPosition, viewport, position }) {
   const formRef = useRef()
   const buttonMaterialRef = useRef()
   const lineMaterialRef = useRef()
-  const emailRef = useRef()
-  const contentRef = useRef()
+  const form = useRef()
   const [hover, setHover] = useState(false)
   const [sent, setSent] = useState(false)
 
@@ -42,21 +42,22 @@ export default function Scene({ scrollPosition, viewport, position }) {
         <backgroundCustomColorShaderMaterial uColorRed={0.356} uColorGreen={0.035} uColorBlue={0.978}/>
         <TitleColor ref={titleRef} position={[0, -0.4, 0.1]} text="GET IN TOUCH" />
         <Html ref={formRef} distanceFactor={0.8} transform position={[0, 0.1, 0]} style={{width: '600px'}} center >
-          <div>
-            <input className="customInput" ref={emailRef} disabled={sent} placeholder="Write your email : me@example.com" />
-          </div>
-          <div>
-            <textarea className="customTextarea" ref={contentRef} disabled={sent} placeholder="Write your question or concern..." />
-          </div>
+          <form ref={form}>
+            <div>
+              <input className="customInput" disabled={sent} name="from_email" placeholder="Write your email : me@example.com" />
+            </div>
+            <div>
+              <textarea className="customTextarea" disabled={sent} name="message" placeholder="Write your question or concern..." />
+            </div>
+          </form>
         </Html>
         <mesh ref={buttonRef} position={[0, -0.65, 0.00001]}
         onPointerEnter={(e) => !sent && setHover(true)} onPointerLeave={(e) => !sent && setHover(false)} onClick={() => {
-          //if (!sent) {
-            
-          //}
-          console.log(emailRef.current.value);
-          console.log(contentRef.current.value);
-          setSent(true)
+          if (!sent && form?.current[0]?.value && form?.current[1]?.value) {
+            // No need to sanitize since email js sanitize the data
+            emailjs.sendForm(process.env.REACT_APP_EMAILJS_SERVICE, process.env.REACT_APP_EMAILJS_TEMPLATE, form.current, process.env.REACT_APP_EMAILJS_USER)
+            setSent(true)
+          }
         }}>
           <circleGeometry args={[0.15, 128]} />
           <buttonShaderMaterial ref={buttonMaterialRef} />
