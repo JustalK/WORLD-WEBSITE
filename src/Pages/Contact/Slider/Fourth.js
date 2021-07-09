@@ -17,6 +17,8 @@ export default function Scene({ scrollPosition, viewport, position }) {
   const formRef = useRef()
   const buttonMaterialRef = useRef()
   const lineMaterialRef = useRef()
+  const emailRef = useRef()
+  const contentRef = useRef()
   const [hover, setHover] = useState(false)
   const [sent, setSent] = useState(false)
 
@@ -41,16 +43,21 @@ export default function Scene({ scrollPosition, viewport, position }) {
         <TitleColor ref={titleRef} position={[0, -0.4, 0.1]} text="GET IN TOUCH" />
         <Html ref={formRef} distanceFactor={0.8} transform position={[0, 0.1, 0]} style={{width: '600px'}} center >
           <div>
-            <input className="customInput" disabled={sent} placeholder="Write your email : me@example.com" />
+            <input className="customInput" ref={emailRef} disabled={sent} placeholder="Write your email : me@example.com" />
           </div>
           <div>
-            <textarea className="customTextarea" disabled={sent} placeholder="Write your question or concern..." />
+            <textarea className="customTextarea" ref={contentRef} disabled={sent} placeholder="Write your question or concern..." />
           </div>
         </Html>
         <mesh ref={buttonRef} position={[0, -0.65, 0.00001]}
         onPointerEnter={(e) => !sent && setHover(true)} onPointerLeave={(e) => !sent && setHover(false)} onClick={() => {
-          setSent(true)}
-        }>
+          //if (!sent) {
+            
+          //}
+          console.log(emailRef.current.value);
+          console.log(contentRef.current.value);
+          setSent(true)
+        }}>
           <circleGeometry args={[0.15, 128]} />
           <buttonShaderMaterial ref={buttonMaterialRef} />
           <text
