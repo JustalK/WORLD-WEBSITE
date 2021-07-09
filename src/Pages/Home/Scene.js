@@ -16,7 +16,7 @@ import '../../shaders/TextShaderMaterial'
 
 extend({ Text });
 
-export default function Scene({ cursorPosition, history }) {
+export default function Scene({ cursorPosition, history, mobile }) {
   const scrollPosition = useRef(0)
   const lineMaterialRef = useRef(0)
   const viewport = useThree((state) => state.viewport)
@@ -50,12 +50,12 @@ export default function Scene({ cursorPosition, history }) {
         new THREE.Vector3( 0.6 * viewport.width/2, viewport.height/2, 0),
       ]}/>
       <text
-        position={[0, 0.28, 1]}
+        position={[0, mobile ? 0.6 : 0.28, 1]}
         fontSize={0.1}
         color= "#ffffff"
         maxWidth={100}
         lineHeight={1.0}
-        text={"ANY VARIATION\nIS ANOTHER WORLD"}
+        text={mobile ? "ANY VARIATION\nIS\nANOTHER WORLD" : "ANY VARIATION\nIS ANOTHER WORLD" }
         anchorX="center"
         textAlign="center"
         font={'/Barlow-Regular.ttf'}
@@ -74,19 +74,23 @@ export default function Scene({ cursorPosition, history }) {
           <MagneticLink cursorLink={cursorLinkRef} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_ABOUT}>Life</MagneticLink>
         </nav>
       </Html>
-      <Html position={[0.32 * viewport.width, -0.25 * viewport.height / 2, 0]} style={{'pointerEvents': 'none', width: '300px'}} center >
-        <span className="summary" data-splitting="">This website has been made for keeping the different aspect of my life in one single place. From here, you can discover either my work life or few of my creation more personnal.</span>
-      </Html>
-      <Html position={[0.42 * viewport.width, -0.42 * viewport.height / 2, 0]} style={{width: '60px', height: '60px'}} center >
-        <MagneticLink className="nextPage" cursorLink={cursorLinkRef} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_CONTACT}>
-          <Arrow />
-        </MagneticLink>
-      </Html>
+      {!mobile && (
+        <>
+          <Html position={[0.32 * viewport.width, -0.25 * viewport.height / 2, 0]} style={{'pointerEvents': 'none', width: '300px'}} center >
+            <span className="summary" data-splitting="">This website has been made for keeping the different aspect of my life in one single place. From here, you can discover either my work life or few of my creation more personnal.</span>
+          </Html>
+          <Html position={[0.42 * viewport.width, -0.42 * viewport.height / 2, 0]} style={{width: '60px', height: '60px'}} center >
+            <MagneticLink className="nextPage" cursorLink={cursorLinkRef} cursorPosition={cursorPosition} setHover={setHover} history={history} to={ROUTE_CONTACT}>
+              <Arrow />
+            </MagneticLink>
+          </Html>
+        </>
+      )}
       <Html position={[0, -0.75 * viewport.height / 2, 0.1]} center >
         <FloatingLink ref={loatingViewRef} history={history} to={ROUTE_ABOUT}  offset={0}>VIEW</FloatingLink>
       </Html>
       <Cursor cursorPosition={hover ? cursorLinkRef : cursorPosition} realCursor={cursorPosition} scrollPosition={scrollPosition} hover={hover} />
-      <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} />
+      <Image position={[0, - 0.2 * viewport.height / 2, 0.0001]} mobile={mobile} />
       <BackgroundAnimated ref={backgroundRef} viewport={viewport} />
     </>
   )

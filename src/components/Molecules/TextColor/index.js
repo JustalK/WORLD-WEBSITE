@@ -30,7 +30,7 @@ const TextColor = forwardRef(({position, text},textMeshRef) => {
       fontSize={mobile.isMobile() ? 0.1 : 0.05}
       font={'/ArchivoNarrow-Regular.ttf'}
       color= "#ffffff"
-      maxWidth={1.8}
+      maxWidth={mobile.isMobile() ? 1.5 : 1.8}
       text={text}
       anchorX="center"
       anchorY="middle"

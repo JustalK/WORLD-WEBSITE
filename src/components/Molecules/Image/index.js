@@ -5,7 +5,7 @@ import { TweenMax as TM } from 'gsap'
 import '../../../shaders/ImageShaderWhiteMaterial'
 import '../../../shaders/BackImageShaderMaterial'
 
-export default function Image({ position }) {
+export default function Image({ position, mobile }) {
   const ref = useRef()
   const back = useRef()
   const mesh = useRef()
@@ -27,11 +27,11 @@ export default function Image({ position }) {
           y: theImage.uv.y
         })
       }}>
-        <planeGeometry args={[0.95, 1.2, 32, 32]} />
+        <planeGeometry args={[mobile ? 1.2 : 0.95, mobile ? 1.5 : 1.2, 32, 32]} />
         <imageShaderWhiteMaterial ref={ref} tDiffuse={tDiffuse} />
       </mesh>
       <mesh rotation={[0, 0, -0.05]} position={[position[0], position[1], position[2]-0.00005]}>
-        <planeGeometry args={[0.95, 1.2, 32, 32]} />
+        <planeGeometry args={[mobile ? 1.2 : 0.95, mobile ? 1.5 : 1.2, 32, 32]} />
         <backImageShaderMaterial ref={back} />
       </mesh>
     </>
