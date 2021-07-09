@@ -5,7 +5,7 @@ import ImageDisplacement from '../../../components/Molecules/ImageDisplacement'
 import Lines from '../../../components/Molecules/Lines'
 import TextColor from '../../../components/Molecules/TextColor'
 
-export default function Fourth({ viewport, position, scrollPosition }) {
+export default function Fourth({ viewport, position, scrollPosition, mobile }) {
   const marriageMeshRef = useRef();
   const lineMaterialRef = useRef()
   const descriptionRef = useRef();
@@ -27,7 +27,7 @@ export default function Fourth({ viewport, position, scrollPosition }) {
       <planeGeometry args={[viewport.width, viewport.height, 1]} />
       <meshPhongMaterial color="#000000" />
       <directionalLight color="#5124FF" ref={lightRef} intensity={0.0} position={[1.0, 0.6, 2]} />
-      <TextColor ref={descriptionRef} position={[0, 0.3, 0.1]} text="My work as a developer is more a passion I fall into when I was 10 year old. I master many libraries and frameworks such as React, Vue, WordPress, Node. I work for multiple companies and try to push myself everyday by experimenting on my personal projects which can be found on my github." />
+      <TextColor ref={descriptionRef} position={[0, mobile ? 0.8 : 0.3, 0.1]} text="My work as a developer is more a passion I fall into when I was 10 year old. I master many libraries and frameworks such as React, Vue, WordPress, Node. I work for multiple companies and try to push myself everyday by experimenting on my personal projects which can be found on my github." />
       <Lines ref={lineMaterialRef} pointsPosition={[
         new THREE.Vector3( viewport.width, viewport.height / 2, 0.0),
         new THREE.Vector3( 2, viewport.height, 0.0),
@@ -35,7 +35,7 @@ export default function Fourth({ viewport, position, scrollPosition }) {
         new THREE.Vector3( -0.5, - 1.2 * viewport.height / 2 + 0.8, 0.0),
         new THREE.Vector3( -viewport.width, - viewport.height / 2, 0.0)
       ]}/>
-      <ImageDisplacement ref={marriageMeshRef} args={[0.8, 0.8, 32]} position={[-0.5, -0.6, 0.6]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'} />
+      <ImageDisplacement ref={marriageMeshRef} args={[mobile ? 1.2 : 0.8, mobile ? 1.2 : 0.8, 32]} position={[mobile ? -0.2 : -0.5, mobile ? -1.0 : -0.6, 0.6]} pathTexture1={'./1.jpeg'} pathTexture2={'./2.jpg'} pathTextureDisplacement={'./displacement/4.png'} />
     </mesh>
   )
 }

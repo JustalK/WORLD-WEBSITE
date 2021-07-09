@@ -11,7 +11,7 @@ import FloatingLink from '../../components/Molecules/FloatingLink'
 import {ROUTE_HOME} from '../../Constants/Routes'
 import { Html } from '@react-three/drei'
 
-export default function Scene({ cursorPosition, scrollPosition, history }) {
+export default function Scene({ cursorPosition, scrollPosition, history, mobile }) {
   const viewport = useThree((state) => state.viewport)
   const backgroundRef = useRef()
   const firstRef = useRef()
@@ -26,10 +26,10 @@ export default function Scene({ cursorPosition, scrollPosition, history }) {
   return (
     <>
       <First ref={firstRef} viewport={viewport} scrollPosition={scrollPosition} backgroundRef={backgroundRef} />
-      <Second viewport={viewport} position={[0, -viewport.height, 0]} scrollPosition={scrollPosition} />
-      <Third viewport={viewport} position={[0, -2 * viewport.height, 0]} scrollPosition={scrollPosition} />
-      <Fourth viewport={viewport} position={[0, -3 * viewport.height, 0]} scrollPosition={scrollPosition} />
-      <Fifth viewport={viewport} position={[0, -4 * viewport.height, 0]} scrollPosition={scrollPosition} />
+      <Second viewport={viewport} position={[0, -viewport.height, 0]} scrollPosition={scrollPosition} mobile={mobile} />
+      <Third viewport={viewport} position={[0, -2 * viewport.height, 0]} scrollPosition={scrollPosition} mobile={mobile} />
+      <Fourth viewport={viewport} position={[0, -3 * viewport.height, 0]} scrollPosition={scrollPosition} mobile={mobile} />
+      <Fifth viewport={viewport} position={[0, -4 * viewport.height, 0]} scrollPosition={scrollPosition} mobile={mobile} />
       <Sixth viewport={viewport} position={[0, -5 * viewport.height, 0]} scrollPosition={scrollPosition} history={history} />
       <Html position={[0, -5 * viewport.height - 0.4, 0]} center >
         <FloatingLink ref={loatingViewRef} history={history} to={ROUTE_HOME} offset={5}>BACK</FloatingLink>

@@ -1,12 +1,14 @@
 import React, { useRef, useEffect, useState, forwardRef } from 'react'
 import { extend, useFrame } from '@react-three/fiber'
 import { Text } from "troika-three-text"
+import useMobileDetect from '../../../utils/useMobileDetect'
 import '../../../shaders/TextColorNoMoveShaderMaterial'
 extend({Text})
 
 const TextColor = forwardRef(({position, text},textMeshRef) => {
   const textMaterialRef = useRef()
   const [hoverText, setHoverText] = useState(false)
+  const mobile = useMobileDetect();
 
   useEffect(() => {
     textMeshRef.current.sync()
@@ -22,11 +24,10 @@ const TextColor = forwardRef(({position, text},textMeshRef) => {
     textMaterialRef.current.uTime += delta
     textMaterialRef.current.uVelo = hoverText ? Math.min(1.0, textMaterialRef.current.uVelo + 0.05) : Math.max(0.0, textMaterialRef.current.uVelo - 0.05)
   })
-
   return (
     <text
       position={position}
-      fontSize={0.05}
+      fontSize={mobile.isMobile() ? 0.1 : 0.05}
       font={'/ArchivoNarrow-Regular.ttf'}
       color= "#ffffff"
       maxWidth={1.8}

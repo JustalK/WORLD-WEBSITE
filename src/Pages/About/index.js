@@ -4,12 +4,15 @@ import { Canvas } from '@react-three/fiber'
 import Scene from './Scene'
 import { TweenMax as TM } from 'gsap'
 import ScrollContainer from './ScrollContainer'
+import useMobileDetect from '../../utils/useMobileDetect'
 
 export default function About({ history }) {
   const cursorPosition = useRef({x: 0.5, y: 0.5})
   const scrollRef = useRef()
   const scroll = useRef(0)
   const page = 5
+  const parserNavigator = useMobileDetect();
+  const mobile = parserNavigator.isMobile();
   const doScroll = (e) => {
     (scroll.current = page * e.target.scrollTop / (e.target.scrollHeight - window.innerHeight));
   }
@@ -22,13 +25,13 @@ export default function About({ history }) {
           y: e.clientY/window.innerHeight
         })
       }}>
-        <Canvas camera={{ position: [0, 0, 2], fov: 50 }}
+        <Canvas camera={{ position: [0, 0, mobile ? 4 : 2], fov: 50 }}
           onCreated={(state) => state.events.connect(scrollRef.current)}
           raycaster={{ computeOffsets: ({ clientX, clientY }) => ({ offsetX: clientX, offsetY: clientY }) }}>
           <Suspense fallback={null}>
             <ambientLight intensity={0.1} />
             <ScrollContainer scroll={scroll}>
-              <Scene cursorPosition={cursorPosition} scrollPosition={scroll} history={history} />
+              <Scene cursorPosition={cursorPosition} scrollPosition={scroll} history={history} mobile={mobile} />
             </ScrollContainer>
           </Suspense>
         </Canvas>
